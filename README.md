@@ -8,6 +8,8 @@ This is a boilerplate for serverless framework with architectural best practices
 
 # Test Query
 Send a POST request with following query,
+```
 {
     "query": "query {users {email username id}}"
 }
+```
