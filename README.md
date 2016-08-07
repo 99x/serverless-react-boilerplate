@@ -14,10 +14,6 @@ You can send POST requests with following queries & mutations,
 }
 
 {
-	"query":"query getUserById{user(id: \"101\"){email id}}"
-}
-
-{
     "query": "mutation signUp { user: signUp(email:\"test@test.com\", username: \"test\", password: \"test1234\"){id username email}}"
 }
 
