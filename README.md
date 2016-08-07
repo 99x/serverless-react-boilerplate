@@ -6,10 +6,26 @@ This is a boilerplate for serverless framework with architectural best practices
 - cd backend && npm install
 - serverless deploy
 
-# Test Query
-Send a POST request with following query,
+# Test Backend
+You can send POST requests with following queries & mutations,
 ```
 {
-    "query": "query {users {email username id}}"
+    "query": "query getAllUsers { users{email username id}}"
+}
+
+{
+	"query":"query getUserById{user(id: \"101\"){email id}}"
+}
+
+{
+    "query": "mutation signUp { user: signUp(email:\"test@test.com\", username: \"test\", password: \"test1234\"){id username email}}"
+}
+
+{
+    "query": "mutation signIn { user: signIn(email:\"rumeshh@99x.com\", password: \"rumesh\"){id username email jwt gravatar}}"
 }
 ```
+
+# Test Angular Client
+- cd client-angular
+- npm start
