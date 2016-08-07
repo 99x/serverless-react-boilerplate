@@ -1,0 +1,21 @@
+{
+  "name": "serverless-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "auth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manoj Fernando <manojf@99x.lk>",
+  "license": "ISC",
+  "dependencies": {
+        "aws-sdk": "^2.2.43",
+        "bcryptjs": "^2.3.0",
+        "bluebird": "^3.3.4",
+        "graphql": "^0.4.18",
+        "gravatar": "^1.5.2",
+        "jsonwebtoken": "^5.7.0",
+        "lodash": "^4.8.2",
+        "uuid": "^2.0.1"
+    }
+}

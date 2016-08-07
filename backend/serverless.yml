@@ -1,0 +1,56 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    v1.docs.serverless.com
+#
+# Happy Coding!
+
+service: aws-nodejs # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+# you can overwrite defaults here
+defaults:
+ stage: dev
+ region: us-east-1
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#  exclude:
+#    - exclude-me.js
+#  artifact: my-service-code.zip
+
+functions:
+  hello:
+    handler: handler.handler
+    memorySize: 512
+    timeout: 10
+    events:
+      - http:
+          path: graphql
+          method: POST
+          environment:
+            AUTH_TOKEN_SECRET: ${secretKey}
+            SERVERLESS_PROJECT: ${project}
+            SERVERLESS_STAGE: ${stage}
+resources:
+  Resources:
+    $ref: ./lib/resources/tables.json
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    newResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: newBucket
