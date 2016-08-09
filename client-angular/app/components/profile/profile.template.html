@@ -1,1 +1,20 @@
-<h1>{{user.message}}</h1>
+<div layout-gt-sm="row" layout="column" layout-align="center center">
+    <md-content class="user-list" flex="">
+        <md-toolbar md-scroll-shrink="">
+            <div class="md-toolbar-tools">
+                <h3>
+          <span>Manage Your Friends</span>
+        </h3>
+            </div>
+        </md-toolbar>
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="friend in  profileVm.friends">
+                <img ng-src="{{friend.gravatar}}" class="md-avatar">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{friend.username}}</h3>
+                    <h4>{{friend.email}}</h4>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>

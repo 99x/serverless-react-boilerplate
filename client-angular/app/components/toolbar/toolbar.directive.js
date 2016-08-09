@@ -9,13 +9,18 @@
         return {
             templateUrl: 'components/toolbar/toolbar.template.html',
             controller: toolbarController,
-            controllerAs: 'toolbar'
+            controllerAs: 'toolbarVm'
         }
     }
 
-    toolbarController.$inject = ["$location"];
+    toolbarController.$inject = ["$rootScope", "store", "$state"];
 
-    function toolbarController(store, $location) {
+    function toolbarController($rootScope, store, $state) {
         var vm = this;
+        vm.logout = function() {
+            store.remove('token');
+            $rootScope.isLoggedin = false;
+            $state.go('login');
+        }
     }
 }());
