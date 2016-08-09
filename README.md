@@ -8,4 +8,5 @@ This is a boilerplate for serverless framework with architectural best practices
 
 # Angular Client
 - cd client-angular
+- Replace graphQL API_URL in app/services/common.service.js with your API_URL
 - gulp server
