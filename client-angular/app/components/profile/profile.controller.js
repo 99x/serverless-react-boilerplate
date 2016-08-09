@@ -5,11 +5,23 @@
         .module('clientAngular')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['$http'];
+    profileController.$inject = ['$rootScope', '$scope', '$state', 'store', 'UserService'];
 
-    function profileController($http) {
-        console.log("init profile.");
+    function profileController($rootScope, $scope, $state, store, UserService) {
         var vm = this;
-        vm.message = 'Hello!!!';
+        vm.friends = [];
+        vm.init = function() {
+            UserService.getAllUsers(store.get('token'))
+                .then(function(data) {
+                        $scope.$apply(function(){
+                            vm.friends = data.users;
+                        });
+                    },
+                    function(err) {
+                        store.remove('token');
+                        $rootScope.isLoggedin = false;
+                        $state.go('login');
+                    });
+        }();
     };
 })();

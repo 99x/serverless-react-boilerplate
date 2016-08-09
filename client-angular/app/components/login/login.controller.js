@@ -5,18 +5,33 @@
         .module('clientAngular')
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$http', "store"];
+    loginController.$inject = ['$rootScope', '$scope', 'store', '$state', 'AuthService'];
 
-    function loginController($http, store) {
+    function loginController($rootScope, $scope, store, $state, AuthService) {
         var vm = this;
-        vm.login = function(){
-            // once login is successfull
-            store.set('token', token);
-            $location.path('/home');
+        vm.dataLoading = false;
+        vm.user = {
+            email: null,
+            password: null
         };
-        vm.logout = function(){
-            store.remove('token');
-            $location.path('/home');
+
+        vm.login = function() {
+            vm.dataLoading = true;
+
+            AuthService.login(vm.user)
+                .then(function(data) {
+                        store.set('token', data.user.jwt);
+                        $rootScope.isLoggedin = true;
+                        $state.go('profile');
+                    },
+                    function(err) {
+                        throw err;
+                    })
+                .finally(function() {
+                    $scope.$apply(function() {
+                        vm.dataLoading = false;
+                    });
+                });
         };
     };
 })();
