@@ -16,6 +16,7 @@
         "gravatar": "^1.5.2",
         "jsonwebtoken": "^5.7.0",
         "lodash": "^4.8.2",
-        "uuid": "^2.0.1"
+        "uuid": "^2.0.1",
+		"serverless-dynamodb-local": "*"
     }
 }
