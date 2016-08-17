@@ -13,6 +13,14 @@
 
 service: aws-nodejs # NOTE: update this with your service name
 
+plugins:
+  - serverless-dynamodb-local
+
+custom:
+  dynamodb:
+    start:
+      port: 8000
+
 provider:
   name: aws
   runtime: nodejs4.3
