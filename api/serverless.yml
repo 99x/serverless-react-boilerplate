@@ -12,7 +12,6 @@
 # Happy Coding!
 
 service: aws-serverless-boilerpate
-
 provider:
   name: aws
   runtime: nodejs4.3
