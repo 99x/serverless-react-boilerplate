@@ -1,0 +1,50 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: aws-serverless-boilerpate
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#  exclude:
+#    - exclude-me.js
+#  artifact: my-service-code.zip
+
+functions:
+  auth:
+    handler: handlers/auth/handler.auth
+    events: ${file(./handlers/auth/config.yml):events}
+
+  todo:
+    handler: handlers/todo/handler.todo
+    events: ${file(./handlers/todo/config.yml):events}
+
+  authorizerFunc:
+    handler: handlers/authorizer/handler.authorizer
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
