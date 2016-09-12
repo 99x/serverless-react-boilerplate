@@ -1,0 +1,12 @@
+events:
+  - http:
+      method: POST
+      path: signup
+      cors: true
+      request: ${file(./templates.yml):request}
+
+  - http:
+      method: POST
+      path: login
+      cors: true
+      request: ${file(./templates.yml):request}

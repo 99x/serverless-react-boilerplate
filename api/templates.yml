@@ -1,0 +1,13 @@
+request:
+  template:
+    application/json: >
+      {
+        "data": "$input.json('$')",
+        "path": "$context.resourcePath",
+        "stage": "$context.stage",
+        "method": "$context.httpMethod",
+        "headers": "{#foreach($header in $input.params().header.keySet())\"$header\": \"$util.escapeJavaScript($input.params().header.get($header))\" #if($foreach.hasNext),#end#end}",
+        "params": "{#foreach($param in $input.params().path.keySet())\"$param\": \"$util.escapeJavaScript($input.params().path.get($param))\" #if($foreach.hasNext),#end#end}",
+        "query": "{#foreach($queryParam in $input.params().querystring.keySet())\"$queryParam\": \"$util.escapeJavaScript($input.params().querystring.get($queryParam))\" #if($foreach.hasNext),#end#end}",
+        "current": "$util.urlEncode($util.base64Decode($context.authorizer.principalId))"
+      }
