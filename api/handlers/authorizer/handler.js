@@ -3,7 +3,8 @@
 var authorize = require('./lib/authorize');
 // Your first function handler
 module.exports.authorizer = (event, context, cb) => {
-    authorize.validate(context, event);
+    const token = decodeURIComponent(event.authorizationToken);
+    authorize.validate(token, context, event);
 };
 
 

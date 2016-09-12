@@ -1,8 +1,18 @@
 'use strict';
 
-// Your first function handler
-module.exports.auth = (event, context, cb) => {
-    context.succeed("im auth function");
-};
+var auth = require('./lib/auth');
 
-// You can add more handlers here, and reference them in serverless.yml
+module.exports.auth = (event, context, cb) => {
+    var {data, path} = event;
+    switch (path) {
+        case '/login':
+            auth.login(data, context);
+            break;
+        case '/signup':
+            auth.signup(data, context);
+            break
+        default:
+            context.fail('Invalid api path');
+    }
+
+};

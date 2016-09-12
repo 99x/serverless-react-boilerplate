@@ -4,6 +4,7 @@ request:
       {
         "data": "$input.json('$')",
         "path": "$context.resourcePath",
+        "stage": "$context.stage",
         "method": "$context.httpMethod",
         "headers": "{#foreach($header in $input.params().header.keySet())\"$header\": \"$util.escapeJavaScript($input.params().header.get($header))\" #if($foreach.hasNext),#end#end}",
         "params": "{#foreach($param in $input.params().path.keySet())\"$param\": \"$util.escapeJavaScript($input.params().path.get($param))\" #if($foreach.hasNext),#end#end}",

@@ -12,6 +12,7 @@
 # Happy Coding!
 
 service: aws-serverless-boilerpate
+
 provider:
   name: aws
   runtime: nodejs4.3
@@ -35,6 +36,36 @@ functions:
 
   authorizerFunc:
     handler: handlers/authorizer/handler.authorizer
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: "${opt:stage}-users"
+        AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+        KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        GlobalSecondaryIndexes:
+        - IndexName: emailIndex
+          KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+
 
 # you can add CloudFormation resource templates here
 #resources:
