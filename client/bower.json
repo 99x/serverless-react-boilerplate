@@ -1,0 +1,20 @@
+{
+  "name": "aws-serverless-client",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Manoj Fernando <manojf@99x.lk>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mjzone/serverless-boilerplate",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-jwt": "^0.1.3"
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "name": "aws-serverless-client",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "4.x",
+        "morgan": "latest"
+    }
+}

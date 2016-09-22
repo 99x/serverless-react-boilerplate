@@ -1,12 +1,9 @@
 'use strict';
 
-var helper = require('./helper');
+var Promise = require('bluebird'),
+    helper = require('./helper');
 
-module.exports.login = (data, context) => {
-    context.succeed("success");
-};
-
-module.exports.signup = (data, context) => {
+module.exports.signup = (data, context, event) => {
     if (!data.email) {
         return context.fail("Error: email is missing.");
     }
@@ -15,53 +12,37 @@ module.exports.signup = (data, context) => {
         name: data.name,
         clearPassword: data.password
     };
-
-    helper.createUser(User, function(err) {
-        if (!err) {
-            context.succeed({
-                status: "success"
-            });
-        } else {
-            context.fail("Error: ", err);
-        }
+    helper.createUser(User).then(status => {
+        context.succeed(status);
+    }).catch(err => {
+        context.fail("Error: " + err);
     });
 };
 
-module.exports.login = function(data, context) {
+module.exports.login = (data, context, event) => {
     if (!(data.email && data.password)) {
-        return context.fail("Error: missing loggin parameters.");
+        return context.fail("Error: missing login parameters.");
     }
-    var email = data.email.toLowerCase(),
-        clearPassword = data.password;
+    var email = data.email.toLowerCase();
+    var clearPassword = data.password;
 
-    helper.getUser(email, function(err, data) {
-        if (err) {
-            return context.fail("Error: internal server error.", err);
-        }
-        if (!data.Item) {
-            return context.fail("Error: user not found.");
-        }
-        var correctHash = data.Item.hash,
-            salt = data.Item.salt;
-
-        helper.computeHash(clearPassword, salt, function(err, salt, hash) {
-            if (err) {
-                context.fail("Error: internal server error, ", err);
-            } else {
-                if (hash === correctHash) {
-                    helper.createJWT(email, function(err, token) {
-                        if (err) {
-                            context.fail("Error: internal server error, ", err);
-                        } else {
-                            context.succeed({
-                                token: token
-                            });
-                        }
-                    });
-                } else {
-                    context.fail("Error: login failed.");
-                }
-            }
+    var loginUser = helper.getUser(email),
+        verifyUser = loginUser.then(user => {
+            return helper.computeHash(clearPassword, user.salt);
         });
+
+    return Promise.join(loginUser, verifyUser, function(user, hash) {
+        var correctHash = user.hash;
+        if (hash.toString('base64') === correctHash) {
+            return helper.createJWT(email).then(token => {
+                context.succeed({
+                    token: token
+                });
+            });
+        } else {
+            context.fail("Error: login failed.");
+        }
+    }).catch(err => {
+        context.fail("Error: " + error);
     });
 };

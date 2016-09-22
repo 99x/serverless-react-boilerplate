@@ -1,8 +1,24 @@
 'use strict';
 
-// Your first function handler
-module.exports.todo = (event, context, cb) => cb(null,
-  { message: 'Go Serverless v1.0! Your function executed successfully!', event }
-);
+var todo = require('./lib/todo');
 
-// You can add more handlers here, and reference them in serverless.yml
+module.exports.todo = (event, context, cb) => {
+    var current = JSON.parse(decodeURIComponent(event.current || "{}")),
+        data = JSON.parse(event.data),
+        params = JSON.parse(event.params || "{}"),
+        path = event.path;
+
+    switch (path) {
+        case '/todos':
+            todo.create(current, data, context);
+            break;
+        case '/todos/{id}':
+            todo.get(current, data, context);
+            break;
+        case 'todos/delete/{id}':
+            todo.delete(current, params, context);
+            break;
+        default:
+            context.fail('Invalid api call');
+    }
+};

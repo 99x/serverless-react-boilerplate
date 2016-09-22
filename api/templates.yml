@@ -2,7 +2,7 @@ request:
   template:
     application/json: >
       {
-        "data": "$input.json('$')",
+        "data": "$util.escapeJavaScript($input.json('$'))",
         "path": "$context.resourcePath",
         "stage": "$context.stage",
         "method": "$context.httpMethod",
