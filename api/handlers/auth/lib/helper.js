@@ -1,117 +1,82 @@
 'use strict';
 
-var AWS = require('aws-sdk'),
-    crypto = require('crypto'),
-    jwt = require('jwt-simple');
+var Promise = require('bluebird'),
+    crypto = Promise.promisifyAll(require('crypto')),
+    jwt = require('jwt-simple'),
+    db = require('../../../database/dynamodb');
 
-const JWT_SECRET = 'my_super_secrect_key',
-    JWT_ALGORITHM = "HS256",
-    CRYPTO_LENGTH = 128,
-    CRYPTO_ITERATIONS = 4096;
+const JWT_SECRET = 'my_super_secrect_key';
+const JWT_ALGORITHM = "HS256";
+const CRYPTO_LENGTH = 128;
+const CRYPTO_ITERATIONS = 4096;
 
-var dynamodb = new AWS.DynamoDB.DocumentClient();
-
-var createJWT = function(email, fn) {
-    var params = {
-        TableName: 'manoj-users',
-        Key: {
-            email: email
-        },
-        ProjectExpression: 'jwt_id'
-    };
-
-    dynamodb.get(params, function(err, data) {
-        if (err) {
-            return fn(err);
-        }
-        var user = data.Item;
-        if (!user) {
-            fn("Error: user not found");
-        } else {
-            var token = jwt.encode({
+// Compose JWT with user information.
+function createJWT(email) {
+    return getUser(email)
+        .then(user => {
+            let token = jwt.encode({
                 jwt_id: user.jwt_id,
-                email: email
+                name: user.name,
+                email: email                
             }, JWT_SECRET, JWT_ALGORITHM);
-            fn(null, token);
-        }
-    });
-};
-module.exports.createJWT = createJWT;
-
-var createToken = function(fn, length) {
-    crypto.randomBytes(length || CRYPTO_LENGTH, function(err, token) {
-        if (err)
-            return fn(err);
-        else
-            fn(null, token.toString('hex'));
-    });
-};
-module.exports.createToken = createToken;
-
-var computeHash = function(password, salt, fn) {
-    if (3 == arguments.length) {
-        crypto.pbkdf2(password, salt, CRYPTO_ITERATIONS, CRYPTO_LENGTH, function(err, derivedKey) {
-            if (err)
-                return fn(err);
-            else
-                fn(null, salt, derivedKey.toString('base64'));
+            return Promise.resolve(token);
+        })
+        .catch(err => {
+            return Promise.reject('User not found');
         });
-    } else {
-        fn = salt;
-        crypto.randomBytes(CRYPTO_LENGTH, function(err, salt) {
-            if (err)
-                return fn(err);
-            salt = salt.toString('base64');
-            computeHash(password, salt, fn);
-        });
-    }
-};
-module.exports.computeHash = computeHash;
+}
 
-var getUser = function(email, fn) {
-    var params = {
-        TableName: 'manoj-users',
+// Returns a promise that resolves to a token with the given length
+function createToken(length) {
+    return crypto.randomBytesAsync(length || CRYPTO_LENGTH);
+}
+
+// Returns a promise that resolves to a hash composed by a password and a salt.
+function computeHash(password, salt) {
+    return crypto.pbkdf2Async(password, salt, CRYPTO_ITERATIONS, CRYPTO_LENGTH);
+}
+
+// Return a promise that resolves to the user queried by the email.
+function getUser(email) {
+    return db('get', {
+        TableName: 'users',
         Key: {
             email: email
         }
-    };
-
-    dynamodb.get(params, function(err, data) {
-        if (err) {
-            fn(err);
-        } else {
-            fn(null, data);
-        }
+    }).then(result => {
+        const user = result.Item;
+        if (!user) return Promise.reject('User not found');
+        return Promise.resolve(user);
     });
-};
-module.exports.getUser = getUser;
+}
 
-var createUser = function(User, fn) {
-    createToken(function(err, token) {
-        if (!err) {
-            computeHash(User.clearPassword, function(err, salt, hash) {
-                createToken(function(err, jwt_id) {
-                    var params = {
-                        TableName: 'manoj-users',
-                        Item: {
-                            email: User.email,
-                            name: User.name,
-                            salt: salt,
-                            hash: hash,
-                            jwt_id: jwt_id
-                        },
-                        ConditionExpression: 'attribute_not_exists (email)'
-                    };
-                    dynamodb.put(params, function(err) {
-                        if (err) {
-                            return fn(err);
-                        } else {
-                            fn(null, token);
-                        }
-                    });
-                }, 32);
-            });
-        }
-    });
+function createUser(User) {
+    var getSalt = createToken(),
+        getHash = getSalt.then(salt => {
+            return computeHash(User.clearPassword, salt.toString('base64'));
+        }),
+        getJWT = getHash.then(hash => {
+            return createToken(32);
+        });
+
+    return Promise.join(getSalt, getHash, getJWT, function(salt, hash, jwt_id) {
+        return db('put', {
+            TableName: 'users',
+            Item: {
+                email: User.email,
+                name: User.name,
+                salt: salt.toString('base64'),
+                hash: hash.toString('base64'),
+                jwt_id: jwt_id.toString('base64')
+            },
+            ConditionExpression: 'attribute_not_exists (email)'
+        }).then(result => Promise.resolve('Success'));
+    }).catch(err => Promise.reject(err));
+}
+
+module.exports = {
+    createJWT: createJWT,
+    computeHash: computeHash,
+    getUser: getUser,
+    createUser: createUser
 };
-module.exports.createUser = createUser;
