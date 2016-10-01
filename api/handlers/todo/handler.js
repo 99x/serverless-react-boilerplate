@@ -15,6 +15,9 @@ module.exports.todo = (event, context, cb) => {
         case '/todos/{id}':
             todo.get(current, data, context);
             break;
+        case '/todos/getAll':
+            todo.getAll(current, data, context);
+            break;
         case 'todos/delete/{id}':
             todo.delete(current, params, context);
             break;

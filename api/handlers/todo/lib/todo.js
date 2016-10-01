@@ -3,7 +3,6 @@
 var helper = require('./helper');
 
 module.exports.create = (current, data, context) => {
-    // handle authorization
     // create or update todo
     // return the updated todo
     context.succeed({
@@ -13,7 +12,6 @@ module.exports.create = (current, data, context) => {
 };
 
 module.exports.get = (current, data, context) => {
-    // handle authorization
     // get the todo by id
     // return the todo
     context.succeed({
@@ -21,8 +19,20 @@ module.exports.get = (current, data, context) => {
     });
 };
 
+module.exports.getAll = (current, data, context) => {
+    var email = current.email;
+    helper.getAllTodos(email).then(todos => {
+        context.succeed({
+            result: todos
+        });
+    }).catch(err => {
+        context.fail("Error: " + err);
+    });
+
+    // get all the todos by email
+};
+
 module.exports.delete = (current, params, context) => {
-    // handle authorization
     // delete todo by id
     // return deleted todo
     context.succeed({
