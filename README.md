@@ -1,4 +1,4 @@
-# AWS Serverless Boilerplate
+# AWS Serverless Boilerplates
 This boilerplate contains,
   - AWS Lambda Functions
   - AWS API Gateway
