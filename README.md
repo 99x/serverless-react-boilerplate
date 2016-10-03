@@ -19,6 +19,7 @@ serverless-react-boilerplate
 * Install webpack and serverless globally.
  ```
  npm i -g webpack
+ 
  npm i -g serverless@1.0.0-rc.1
  ```
 * Run `npm install` inside the root folder, serverless folder and web folder.
