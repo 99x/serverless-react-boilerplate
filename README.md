@@ -1,29 +1,38 @@
-# AWS Serverless Boilerplate
-This boilerplate contains,
-  - AWS Lambda Functions
-  - AWS API Gateway
-  - Request Mapping Templates
-  - Dynamodb table templates
-  - IAM Roles Definition
-  - AWS Custom Authorizer Authentication
-  - CRUD for sample TODO application
-  - Angular client that utilizes the API.
+serverless-react-boilerplate
+============================
 
-## Prerequisite
-  - Install serverless rc1
-  ``` npm install serverless -g ```
-  - Make sure you have setup aws credentials with your aws account. if not follow the guide here.       http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+[![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://www.npmjs.com/package/serverless-dynamodb-local)
 
-## Deploy resources, functions and endpoints
-```
-    cd api
-    serverless deploy
-```
+## This Plugin Requires
+* Serverless serverless@v1-rc.1
 
-## Starting the client
-```
-    cd client
-    npm Install
-    node client.js
-```
-Visit ```localhost:3000```
+## Features
+* Support offline development with dynamodb, lambda and API Gateway
+* Support local dynamodb seeds/migrations
+* Build automation in client and server to ease local development
+* Rich request template
+* Lambda CRUD operations for a Todo application
+* React web application to utilize the API
+
+## Installing Dependencies.
+
+* Run `npm install` inside the root folder, serverless folder and web folder.
+
+## Starting server and client.
+
+* Run `npm run app` from the root folder.
+* Visit `http://localhost:8080`
+
+## Deploy server to AWS
+
+* Run `npm run deploy`
+
+
+## Links
+* [serverless-dynamodb-local plugin](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
+* [serverless-offline plugin](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
+
+
+## License
+  [MIT](LICENSE)
