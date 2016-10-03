@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: aws-basic-boilerpate
+service: aws-react-boilerpate
 
 provider:
   name: aws
@@ -34,7 +34,7 @@ custom:
     start:
       migration: true
     migration:
-      dir: ./offline/migrations
+      dir: offline/migrations
 
 functions:
   todo:
@@ -42,4 +42,4 @@ functions:
     events: ${file(handlers/todo/config.yml):events}
 
 resources:
-  Resources: ${file(./resources/tables.yml):migration}
+  Resources: ${file(resources/tables.yml):migration}

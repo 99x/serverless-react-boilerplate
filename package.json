@@ -12,9 +12,8 @@
     "webpack": "1.13.2"
   },
   "scripts": {
-    "install": "cd serverless && sls dynamodb install",
-    "app": "gulp app",
-    "deploy": "cd serverless && sls deploy",
+    "app": "gulp",
+    "deploy": "gulp deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/mjzone/serverless-boilerplate/issues"
   },
-  "homepage": "https://github.com/mjzone/serverless-boilerplate#readme"
+  "homepage": "https://github.com/mjzone/serverless-boilerplate#readme",
+  "devDependencies": {
+    "opn": "4.0.2"
+  }
 }
