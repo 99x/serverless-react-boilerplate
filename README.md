@@ -35,8 +35,8 @@ serverless-react-boilerplate
 
 
 ## Links
-* [serverless-dynamodb-local plugin](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
-* [serverless-offline plugin](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
+* [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
+* [serverless-offline plugin](https://github.com/dherault/serverless-offline)
 
 
 ## License
