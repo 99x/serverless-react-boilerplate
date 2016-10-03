@@ -1,0 +1,20 @@
+{
+  "name": "aws-angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "serverless deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manoj Fernando <manojf@99x.lk>",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.6.1",
+    "bluebird": "^3.4.6"
+  },
+  "devDependencies": {
+    "serverless-offline": "git+https://github.com/dherault/serverless-offline.git/#serverless_v1",
+    "serverless-dynamodb-local": "1.0.2"
+  }
+}

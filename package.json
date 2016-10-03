@@ -1,0 +1,36 @@
+{
+  "name": "serverless-boilerplate",
+  "version": "1.0.0",
+  "description": "basic boilerplate with offline development setup",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "3.9.1",
+    "gulp-exec": "2.1.2",
+    "gulp-sequence": "0.4.6",
+    "i": "0.3.5",
+    "serverless-dynamodb-local": "1.0.2",
+    "webpack": "1.13.2"
+  },
+  "scripts": {
+    "install": "cd serverless && sls dynamodb install",
+    "app": "gulp app",
+    "deploy": "cd serverless && sls deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjzone/serverless-boilerplate.git"
+  },
+  "keywords": [
+    "serverless",
+    "boilerplate",
+    "aws",
+    "offline"
+  ],
+  "author": "Manoj Fernando <manojf@99x.lk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mjzone/serverless-boilerplate/issues"
+  },
+  "homepage": "https://github.com/mjzone/serverless-boilerplate#readme"
+}

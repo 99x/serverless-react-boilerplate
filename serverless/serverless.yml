@@ -1,0 +1,45 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: aws-basic-boilerpate
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:*"
+      Resource:
+        - "arn:aws:dynamodb:us-east-1:*"
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  dynamodb:
+    start:
+      migration: true
+    migration:
+      dir: ./offline/migrations
+
+functions:
+  todo:
+    handler: handlers/todo/handler.todo
+    events: ${file(handlers/todo/config.yml):events}
+
+resources:
+  Resources: ${file(./resources/tables.yml):migration}
