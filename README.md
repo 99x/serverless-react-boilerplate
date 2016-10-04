@@ -12,8 +12,16 @@ serverless-react-boilerplate
 ```
 |──serverless
 |  |──handlers
+|  |  |──todo
+|  |  |  |──lib
+|  |  |  |  |──todo.js
+|  |  |  |  |──helper.js
+|  |  |  |──config.yml
+|  |  |  |──handler.js
 |  |──database
+|  |  |──dynamodb.js
 |  |──offline
+|  |  |──migrations
 |  |──resources
 |  |──test
 |  |──event.json
