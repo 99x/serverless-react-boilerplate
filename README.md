@@ -16,7 +16,8 @@ serverless-react-boilerplate
 * Lambda CRUD operations for a Todo application
 * React web application to utilize the API
 
-## Installing Dependencies.
+## Usage & Dependencies.
+* Clone this repo
 * Install webpack and serverless globally.
  ```
  npm i -g webpack
