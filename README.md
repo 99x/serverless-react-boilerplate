@@ -30,7 +30,7 @@ serverless-react-boilerplate
 * Run `npm run app` from the root folder.
 * Visit `http://localhost:8080`
 
-## Deploy server to AWS
+## Deploying to AWS
 
 * Run `npm run deploy`
 
