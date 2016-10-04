@@ -5,8 +5,8 @@ serverless-react-boilerplate
 [![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## This Boilerplate Requires
-* Serverless serverless@v1-rc.1
+## Serverless Version
+* serverless@v1-rc.1
 
 ## Features
 * Support offline development with dynamodb, lambda and API Gateway
@@ -53,9 +53,7 @@ serverless-react-boilerplate
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 * Install webpack and serverless globally
  ```
- npm i -g webpack
- 
- npm i -g webpack-dev-server
+ npm i -g webpack webpack-dev-server
  
  npm i -g serverless@1.0.0-rc.1
  ```
