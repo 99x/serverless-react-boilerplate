@@ -8,6 +8,14 @@ serverless-react-boilerplate
 ## This Boilerplate Requires
 * Serverless serverless@v1-rc.1
 
+## Features
+* Support offline development with dynamodb, lambda and API Gateway
+* Support local dynamodb seeds/migrations
+* Build automation in client and server to ease local development
+* Rich request template
+* Lambda CRUD operations for a Todo application
+* React web application to utilize the API
+
 ###Directory structure
 ```
 |──serverless
@@ -39,15 +47,6 @@ serverless-react-boilerplate
 |──serverless.yml
 
 ```
-
-## Features
-* Support offline development with dynamodb, lambda and API Gateway
-* Support local dynamodb seeds/migrations
-* Build automation in client and server to ease local development
-* Rich request template
-* Lambda CRUD operations for a Todo application
-* React web application to utilize the API
-
 ## Usage & Dependencies.
 * Clone this repo
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
