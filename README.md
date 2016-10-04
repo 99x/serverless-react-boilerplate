@@ -2,7 +2,7 @@ serverless-react-boilerplate
 ============================
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
-[![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://www.npmjs.com/package/serverless-dynamodb-local)
+[![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## This Plugin Requires
@@ -16,7 +16,8 @@ serverless-react-boilerplate
 * Lambda CRUD operations for a Todo application
 * React web application to utilize the API
 
-## Installing Dependencies.
+## Usage & Dependencies.
+* Clone this repo
 * Install webpack and serverless globally.
  ```
  npm i -g webpack
@@ -25,12 +26,12 @@ serverless-react-boilerplate
  ```
 * Run `npm install` inside the root folder, serverless folder and web folder.
 
-## Starting server and client.
+## Starting the local server and the client.
 
 * Run `npm run app` from the root folder.
 * Visit `http://localhost:8080`
 
-## Deploy server to AWS
+## Deploying to AWS
 
 * Run `npm run deploy`
 
