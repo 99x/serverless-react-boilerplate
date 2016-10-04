@@ -8,6 +8,30 @@ serverless-react-boilerplate
 ## This Plugin Requires
 * Serverless serverless@v1-rc.1
 
+###Directory structure
+```
+|──serverless
+|  |──handlers
+|  |──database
+|  |──offline
+|  |──resources
+|  |──test
+|  |──event.json
+|  |──templates.yml
+|  |──package.json
+|──web
+|  |──src
+|  |  |──components
+|  |  |──index.js
+|  |──index.html
+|  |──package.json
+|  |──webpack.config.js
+|──gulpfile.js
+|──package.json
+|──serverless.yml
+
+```
+
 ## Features
 * Support offline development with dynamodb, lambda and API Gateway
 * Support local dynamodb seeds/migrations
@@ -18,6 +42,7 @@ serverless-react-boilerplate
 
 ## Usage & Dependencies.
 * Clone this repo
+* Make sure AWS credentials are setup properly. Otherwise refer [this document](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 * Install webpack and serverless globally
  ```
  npm i -g webpack
