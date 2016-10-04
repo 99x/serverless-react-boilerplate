@@ -18,13 +18,13 @@ serverless-react-boilerplate
 
 ## Usage & Dependencies.
 * Clone this repo
-* Install webpack and serverless globally.
+* Install webpack and serverless globally
  ```
  npm i -g webpack
  
  npm i -g serverless@1.0.0-rc.1
  ```
-* Run `npm install` inside the root folder, serverless folder and web folder.
+* Run `npm install` inside the root folder
 
 ## Starting the local server and the client.
 
