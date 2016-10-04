@@ -12,6 +12,8 @@
     "webpack": "1.13.2"
   },
   "scripts": {
+	"preinstall": "cd web && npm install",
+	"postinstall": "cd serverless && npm install",
     "app": "gulp",
     "deploy": "gulp deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
