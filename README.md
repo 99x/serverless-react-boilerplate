@@ -26,7 +26,7 @@ serverless-react-boilerplate
  ```
 * Run `npm install` inside the root folder, serverless folder and web folder.
 
-## Starting server and client.
+## Starting the local server and the client.
 
 * Run `npm run app` from the root folder.
 * Visit `http://localhost:8080`
