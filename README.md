@@ -55,6 +55,8 @@ serverless-react-boilerplate
  ```
  npm i -g webpack
  
+ npm i -g webpack-dev-server
+ 
  npm i -g serverless@1.0.0-rc.1
  ```
 * Run `npm install` inside the root folder
