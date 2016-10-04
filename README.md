@@ -34,6 +34,7 @@ serverless-react-boilerplate
 |  |──test
 |  |──event.json
 |  |──templates.yml
+|  |──serverless.yml
 |  |──package.json
 |──web
 |  |──src
@@ -44,7 +45,7 @@ serverless-react-boilerplate
 |  |──webpack.config.js
 |──gulpfile.js
 |──package.json
-|──serverless.yml
+
 
 ```
 ## Usage & Dependencies.
