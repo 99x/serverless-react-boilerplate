@@ -5,8 +5,9 @@ serverless-react-boilerplate
 [![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Serverless Version
+## Requirements
 * serverless@v1-rc.1
+* Java Runtime Engine (JRE) version 6.x or newer to run Dynamodb Local
 
 ## Features
 * Support offline development with dynamodb, lambda and API Gateway
