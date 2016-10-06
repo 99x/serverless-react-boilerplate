@@ -46,6 +46,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 |  |  |──dynamodb.js
 |  |──offline
 |  |  |──migrations
+|  |  |  |  |──todo.json
 |  |──resources
 |  |──test
 |  |──event.json
