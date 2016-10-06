@@ -17,6 +17,21 @@ serverless-react-boilerplate
 * Lambda CRUD operations for a Todo application
 * React web application to utilize the API
 
+## How to develop and test offline?
+We have used [serverless-offline plugin](https://github.com/dherault/serverless-offline) and [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local) in this boilerplate. You can declare your table templates and seeds in `offline/migrations` folder just like the `todo.json` template. When you spin up the offline server, these tables will be used as the datasources for your lambda functions. 
+
+## Production vs Offline
+Thanks to the offline plugin's environment variable `IS_OFFLINE` we can select between local dynamodb and aws dynamodb. 
+```
+var dynamodbOfflineOptions = {
+        region: "localhost",
+        endpoint: "http://localhost:8000"
+    },
+    isOffline = () => process.env.IS_OFFLINE;
+
+var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOptions) :  new AWS.DynamoDB.DocumentClient();
+```
+
 ###Directory structure
 ```
 |──serverless
