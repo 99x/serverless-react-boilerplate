@@ -92,7 +92,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 * Run `npm run deploy`
 
 ## Note
-At the moment, once you have tested your api locally and deploy using `npm run deploy`,  we will be uninstalling the dynamodb local binary from the project to avoid it getting into the serverless deploy package. So next time you have to run `npm run db-setup` before starting the application using `npm run app`. This will be fixed soon.
+At the moment, once you have tested your api locally and deploy using `npm run deploy`,  we will be uninstalling the dynamodb local binary from the project to avoid it getting into the serverless deploy package. So next time you have to run `npm run db-setup` before starting the application using `npm run app`. This will be fixed soon. [Issue #20](https://github.com/99xt/serverless-react-boilerplate/issues/20)
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
