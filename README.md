@@ -51,7 +51,7 @@ serverless-react-boilerplate
 ```
 ## Usage & Dependencies.
 * Clone this repo
-* Make sure AWS credentials are setup properly. Otherwise refer [this document](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+* Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
 * Install webpack and serverless globally
  ```
  npm i -g webpack webpack-dev-server
