@@ -14,7 +14,7 @@ serverless-react-boilerplate
 * Support local dynamodb seeds/migrations
 * Build automation in client and server to ease local development
 * Rich request template
-* Lambda CRUD operations for a Todo application
+* Lambda CRUD operations for a Todo application with live reload
 * React web application to utilize the API
 
 ## How to develop and test offline?
@@ -74,23 +74,25 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
  npm i -g serverless@1.0.0-rc.1
  ```
 * Install project dependencies. `cd serverless-react-boilerplate` and type,
-```
+ ```
  npm install 
-```
+ ```
 * Install dynamodb local. (Make sure you have Java runtime 6.x or newer)
-```
+ ```
  npm run db-setup
-```
+ ```
 * Run the client and server
-```
+ ```
  npm run app
-```
+ ```
 * Visit `http://localhost:8080`
 
 ## Deploying to AWS
 
 * Run `npm run deploy`
 
+## Note
+At the moment, once you have tested your api locally and deploy using `npm run deploy`,  we will be uninstalling the dynamodb local binary from the project to avoid it getting into the serverless deploy package. So next time you have to run `npm run db-setup` before starting the application using `npm run app`. This will be fixed soon.
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
