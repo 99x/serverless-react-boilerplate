@@ -68,7 +68,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 * Clone this repo.
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
 * Install webpack and serverless globally.
- ```
+```
  npm i -g webpack webpack-dev-server
  
  npm i -g serverless@1.0.0-rc.1
