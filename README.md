@@ -7,7 +7,7 @@ serverless-react-boilerplate
 
 ## Requirements
 * serverless@v1-rc.1
-* Java Runtime Engine (JRE) version 6.x or newer to run Dynamodb Local
+* Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally
 
 ## Features
 * Support offline development with dynamodb, lambda and API Gateway
