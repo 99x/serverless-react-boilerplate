@@ -64,20 +64,27 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 
 
 ```
-## Usage & Dependencies.
-* Clone this repo
+## Installation & Usage
+* Clone this repo.
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
-* Install webpack and serverless globally
+* Install webpack and serverless globally.
  ```
  npm i -g webpack webpack-dev-server
  
  npm i -g serverless@1.0.0-rc.1
  ```
-* Run `npm install` inside the root folder
-
-## Starting the local server and the client.
-
-* Run `npm run app` from the root folder.
+* Install project dependencies. `cd serverless-react-boilerplate` and type,
+```
+ npm install 
+```
+* Install dynamodb local. (Make sure you have Java runtime 6.x or newer)
+```
+ npm run db-setup
+```
+* Run the client and server
+```
+ npm run app
+```
 * Visit `http://localhost:8080`
 
 ## Deploying to AWS
