@@ -18,12 +18,6 @@ function runCommand(cmd, done) {
     });
 }
 
-/* Install dynamodb locally */
-gulp.task('install-dynamodb', function(done) {
-    console.log('This will take about 1 minute to complete at first run');
-    runCommand('cd serverless' + commandSeparator + ' sls dynamodb install', done);
-});
-
 /* Start dynamodb local instance */
 gulp.task('start-dynamodb', function(done) {
     runCommand('cd serverless' + commandSeparator + ' sls dynamodb start', done);
@@ -55,4 +49,4 @@ gulp.task('deploy', ['uninstall-dynamodb'], function() {
 });
 
 /* Start application locally */
-gulp.task('default', gulpSequence('install-dynamodb', ['start-client', 'open-website', 'start-dynamodb', 'start-offline-server']));
+gulp.task('default', gulpSequence(['start-client', 'open-website', 'start-dynamodb', 'start-offline-server']));
