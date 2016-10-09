@@ -98,7 +98,7 @@ At the moment, once you have tested your api locally and deploy using `npm run d
 Your contributions are much appriciated. 
 
 ## Release Log
-serverless@1.0.0-rc.2 support added.
+Release v1.2 - added support for serverless@1.0.0-rc.2
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
