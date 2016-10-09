@@ -6,7 +6,6 @@ serverless-react-boilerplate
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Requirements
-* serverless@v1
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally
 
 ## Features
