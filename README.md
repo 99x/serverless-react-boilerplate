@@ -39,7 +39,6 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 |  |  |  |──lib
 |  |  |  |  |──todo.js
 |  |  |  |  |──helper.js
-|  |  |  |──config.yml
 |  |  |  |──handler.js
 |  |──database
 |  |  |──dynamodb.js
