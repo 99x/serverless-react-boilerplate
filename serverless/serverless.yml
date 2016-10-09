@@ -39,7 +39,30 @@ custom:
 functions:
   todo:
     handler: handlers/todo/handler.todo
-    events: ${file(handlers/todo/config.yml):events}
+    events:
+      - http:
+          method: GET
+          path: todos/getAll
+          cors: true
+          request: ${file(./templates.yml):request}
+          
+      - http:
+          method: DELETE
+          path: todos/delete/{id}
+          cors: true
+          request: ${file(./templates.yml):request}
+
+      - http:
+          method: POST
+          path: todos
+          cors: true
+          request: ${file(./templates.yml):request}
+
+      - http:
+          method: PUT
+          path: todos/update
+          cors: true
+          request: ${file(./templates.yml):request}
 
 resources:
   Resources: ${file(resources/tables.yml):migration}
