@@ -6,7 +6,7 @@ serverless-react-boilerplate
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Requirements
-* serverless@v1-rc.1
+* serverless@v1
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally
 
 ## Features
@@ -72,7 +72,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
  npm i -g webpack webpack-dev-server
  
- npm i -g serverless@1.0.0-rc.1
+ npm i -g serverless
  ```
 * Install project dependencies. `cd serverless-react-boilerplate` and type,
 ```
@@ -94,6 +94,12 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 
 ## Note
 At the moment, once you have tested your api locally and deploy using `npm run deploy`,  we will be uninstalling the dynamodb local binary from the project to avoid it getting into the serverless deploy package. So next time you have to run `npm run db-setup` before starting the application using `npm run app`. This will be fixed soon. [Issue #20](https://github.com/99xt/serverless-react-boilerplate/issues/20)
+
+## Contribution
+Your contributions are much appriciated. 
+
+## Release Log
+serverless@1.0.0-rc.2 support added.
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
