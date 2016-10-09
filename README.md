@@ -94,8 +94,8 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 Your contributions are much appriciated. 
 
 ## Release Log
-Release v1.2 - added support for serverless@1.0.0-rc.2
-Release v1.3 - fixed local dynamobd get packaged for deployment
+* Release v1.2 - added support for serverless@1.0.0-rc.2
+* Release v1.3 - fixed local dynamobd get packaged for deployment
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
