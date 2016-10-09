@@ -13,6 +13,11 @@
 
 service: aws-react-boilerpate
 
+package:
+  exclude:
+    - node_modules\dynamodb-localhost
+    - node_modules\serverless-dynamodb-local
+
 provider:
   name: aws
   runtime: nodejs4.3
@@ -45,7 +50,7 @@ functions:
           path: todos/getAll
           cors: true
           request: ${file(./templates.yml):request}
-          
+
       - http:
           method: DELETE
           path: todos/delete/{id}

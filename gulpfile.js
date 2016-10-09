@@ -14,7 +14,7 @@ function runCommand(cmd, done) {
         console.log(data);
     });
     ls.on('close', function(data) {
-        done();
+        done && done();
     });
 }
 
@@ -38,14 +38,9 @@ gulp.task('open-website', function(done) {
     require("opn")("http://localhost:8080");
 });
 
-/* Remove dynamodb local instance */
-gulp.task('uninstall-dynamodb', function(done) {
-    runCommand('cd serverless' + commandSeparator + ' sls dynamodb remove', done);
-});
-
 /* Deploy service in AWS */
-gulp.task('deploy', ['uninstall-dynamodb'], function() {
-    runCommand('cd serverless' + commandSeparator + ' sls deploy');
+gulp.task('deploy', function() {
+    runCommand('cd serverless' + commandSeparator + ' sls deploy -v');
 });
 
 /* Start application locally */
