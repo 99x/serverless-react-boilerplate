@@ -14,7 +14,7 @@ export default class TodoListItem extends React.Component {
         const {task, isCompleted} = this.props;
         const taskStyle = {
             color: isCompleted? 'green' : 'red',
-            'text-decoration': isCompleted? 'line-through' : '',
+            'textDecoration': isCompleted? 'line-through' : '',
             cursor: 'pointer'
         };
         if(this.state.isEditing){
