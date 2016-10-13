@@ -99,6 +99,7 @@ Your contributions are much appriciated.
 * Release v1.2 - added support for serverless@1.0.0-rc.2
 * Release v1.3 - fixed local dynamobd get packaged for deployment
 * Release v2.0 - added support for the latest serverless v1.0 Issues #24 #25
+* Release v2.0.1 - dynamodb local table creation bug fix
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
