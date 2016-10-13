@@ -45,7 +45,6 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 |  |──offline
 |  |  |──migrations
 |  |  |  |  |──todo.json
-|  |──resources
 |  |──test
 |  |──event.json
 |  |──templates.yml
@@ -70,7 +69,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
  npm i -g webpack webpack-dev-server
  
- npm i -g serverless
+ npm i -g serverless@1.0
  ```
 * Install project dependencies. `cd serverless-react-boilerplate` and type,
 ```
@@ -87,15 +86,20 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 * Visit `http://localhost:8080`
 
 ## Deploying to AWS
-
-* Run `npm run deploy`
+When you are ready to deploy your database and api to AWS, run following command.
+This will deploy your local dabase and local API Gateway to AWS.
+```
+npm run deploy
+```
 
 ## Contribution
 Your contributions are much appriciated. 
 
 ## Release Log
-* Release v1.2 - added support for serverless@1.0.0-rc.2
+* Release v2.0.1 - dynamodb local table creation bug fix
+* Release v2.0 - added support for the latest serverless v1.0 Issues #24 #25
 * Release v1.3 - fixed local dynamobd get packaged for deployment
+* Release v1.2 - added support for serverless@1.0.0-rc.2
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
