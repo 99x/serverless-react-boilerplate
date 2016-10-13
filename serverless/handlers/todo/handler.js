@@ -3,7 +3,7 @@
 var todo = require('./lib/todo');
 
 module.exports.todo = function(event, context, cb) {
-    var params = event.params || "{}",
+    var params = JSON.parse(event.params || "{}"),
         path = event.path,
         data = event.data;
 

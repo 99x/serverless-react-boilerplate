@@ -27,8 +27,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>
-                    Serverless Todo App</h1>
+                <h1>Serverless Todo App</h1>
                 <CreateTodo createTask={this.createTask.bind(this)}/>
                 <TodoList todos={this.state.todos} toggleTask={this.toggleTask.bind(this)} saveTask={this.saveTask.bind(this)} deleteTask={this.deleteTask.bind(this)}/>
             </div>
@@ -37,10 +36,10 @@ export default class App extends React.Component {
 
     createTask(task) {
         var self = this;
-        axios.post(BASE_URL + '/todos', task).then(function(response) {
-            self.state.todos.push(task);
-            self.setState({todos: self.state.todos});
-        }).catch(function(error) {
+        self.state.todos.unshift(task);
+        self.setState({todos: self.state.todos});
+        axios.post(BASE_URL + '/todos', task).then(function(response) {})
+        .catch(function(error) {
             console.log(error);
         });
     }
@@ -53,13 +52,13 @@ export default class App extends React.Component {
 
     saveTask(oldTask, newTask) {
         var self = this;
+        const foundTodo = _.find(self.state.todos, todo => todo.id === oldTask.id);
+        foundTodo.task = newTask;
+        self.setState({todos: self.state.todos});
         axios.put(BASE_URL + '/todos/update', {
             id: oldTask.id,
             task: newTask
-        }).then(function(response) {
-            const foundTodo = _.find(self.state.todos, todo => todo.id === oldTask.id);
-            foundTodo.task = newTask;
-            self.setState({todos: self.state.todos});
+        }).then(function(response) {            
         }).catch(function(error) {
             console.log(error);
         });
@@ -67,9 +66,9 @@ export default class App extends React.Component {
 
     deleteTask(taskToDelete) {
         var self = this;
-        axios.delete(BASE_URL + '/todos/delete/'+ taskToDelete.id).then(function(response) {
-            _.remove(self.state.todos, todo => todo.id === taskToDelete.id);
+        _.remove(self.state.todos, todo => todo.id === taskToDelete.id);
             self.setState({todos: self.state.todos});
+        axios.delete(BASE_URL + '/todos/delete/'+ taskToDelete.id).then(function(response) {            
         }).catch(function(error) {
             console.log(error);
         });
