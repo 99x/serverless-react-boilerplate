@@ -47,7 +47,14 @@ export default class App extends React.Component {
     toggleTask(task) {
         const foundTodo = _.find(this.state.todos, todo => todo.id === task.id);
         foundTodo.isCompleted = !foundTodo.isCompleted;
-        this.setState({todos: this.state.todos});
+        this.setState({ todos: this.state.todos });
+        axios.put(BASE_URL + '/todos/status', {
+            id: task.id,
+            isCompleted: foundTodo.isCompleted
+        }).then(function(response) {            
+        }).catch(function(error) {
+            console.log(error);
+        });
     }
 
     saveTask(oldTask, newTask) {
