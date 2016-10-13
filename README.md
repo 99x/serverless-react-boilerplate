@@ -69,7 +69,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
  npm i -g webpack webpack-dev-server
  
- npm i -g serverless
+ npm i -g serverless@1.0
  ```
 * Install project dependencies. `cd serverless-react-boilerplate` and type,
 ```
