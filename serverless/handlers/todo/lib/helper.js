@@ -44,6 +44,17 @@ function updateItem(data) {
     });
 }
 
+function updateStatus(data) {
+    return db('update', {
+        TableName: 'todos',
+        Key: {
+            id: data.id
+        },
+        UpdateExpression: 'set isCompleted = :isCompleted',
+        ExpressionAttributeValues: {':isCompleted': data.isCompleted}
+    });
+}
+
 function deleteItem(params){
     return db('delete', {
         TableName: 'todos',
@@ -57,6 +68,7 @@ module.exports = {
     getTodo: getTodo,
     getAllTodos: getAllTodos,
     updateItem: updateItem,
+    updateStatus: updateStatus,
     createItem: createItem,
     deleteItem: deleteItem
 };

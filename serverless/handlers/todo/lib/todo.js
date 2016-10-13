@@ -18,6 +18,14 @@ module.exports.update = (data, context) => {
     })
 };
 
+module.exports.status = (data, context) => {
+    helper.updateStatus(data).then(result => {
+        context.succeed({});
+    }).catch(err => {
+        context.fail("Error: " + err);
+    })
+};
+
 module.exports.getAll = (params, context) => {
     helper.getAllTodos().then(todos => {
         context.succeed({

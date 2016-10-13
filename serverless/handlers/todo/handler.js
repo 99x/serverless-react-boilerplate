@@ -14,6 +14,9 @@ module.exports.todo = function(event, context, cb) {
         case '/todos/update':
             todo.update(data, context);
             break;
+        case '/todos/status':
+            todo.status(data, context);
+            break;
         case '/todos/getAll':
             todo.getAll(params, context);
             break;

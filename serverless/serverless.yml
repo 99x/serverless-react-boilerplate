@@ -72,3 +72,10 @@ functions:
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
+
+      - http:
+          method: PUT
+          path: todos/status
+          integration: lambda
+          cors: true
+          request: ${file(./templates.yml):request}
