@@ -45,7 +45,6 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 |  |──offline
 |  |  |──migrations
 |  |  |  |  |──todo.json
-|  |──resources
 |  |──test
 |  |──event.json
 |  |──templates.yml
@@ -87,8 +86,10 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 * Visit `http://localhost:8080`
 
 ## Deploying to AWS
-
-* Run `npm run deploy`
+When you are ready to deploy your database and api to AWS run following command.
+```
+npm run deploy
+```
 
 ## Contribution
 Your contributions are much appriciated. 
