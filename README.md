@@ -86,7 +86,8 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 * Visit `http://localhost:8080`
 
 ## Deploying to AWS
-When you are ready to deploy your database and api to AWS run following command.
+When you are ready to deploy your database and api to AWS, run following command.
+This will deploy your local dabase and local API Gateway to AWS.
 ```
 npm run deploy
 ```
@@ -97,6 +98,7 @@ Your contributions are much appriciated.
 ## Release Log
 * Release v1.2 - added support for serverless@1.0.0-rc.2
 * Release v1.3 - fixed local dynamobd get packaged for deployment
+* Release v2.0 - added support for the latest serverless v1.0 Issues #24 #25
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
