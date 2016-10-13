@@ -99,6 +99,7 @@ npm run deploy
 Your contributions are much appriciated. 
 
 ## Release Log
+* Release v2.1.1 - Improvements in react web app
 * Release v2.0.1 - dynamodb local table creation bug fix
 * Release v2.0 - added support for the latest serverless v1.0 Issues #24 #25
 * Release v1.3 - fixed local dynamobd get packaged for deployment
