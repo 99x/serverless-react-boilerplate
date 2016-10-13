@@ -16,6 +16,9 @@ serverless-react-boilerplate
 * Lambda CRUD operations for a Todo application with live reload
 * React web application to utilize the API
 
+## Demo App
+A simple todo app built with serverless. [Demo Site](https://evening-brushlands-67444.herokuapp.com/)
+
 ## How to develop and test offline?
 We have used [serverless-offline plugin](https://github.com/dherault/serverless-offline) and [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local) in this boilerplate. You can declare your table templates and seeds in `offline/migrations` folder just like the `todo.json` template. When you spin up the offline server, these tables will be used as the datasources for your lambda functions. 
 
