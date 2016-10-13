@@ -14,6 +14,6 @@
   },
   "devDependencies": {
     "serverless-offline": "git+https://github.com/dherault/serverless-offline.git/#serverless_v1",
-    "serverless-dynamodb-local": "1.0.2"
+    "serverless-dynamodb-local": "0.2.13"
   }
 }

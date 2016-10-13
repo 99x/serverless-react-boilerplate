@@ -15,8 +15,8 @@ service: aws-react-boilerpate
 
 package:
   exclude:
-    - node_modules\dynamodb-localhost
-    - node_modules\serverless-dynamodb-local
+    - node_modules/dynamodb-localhost/**
+    - node_modules/serverless-dynamodb-local/**
 
 provider:
   name: aws
@@ -48,26 +48,27 @@ functions:
       - http:
           method: GET
           path: todos/getAll
+          integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
 
       - http:
           method: DELETE
           path: todos/delete/{id}
+          integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
 
       - http:
           method: POST
           path: todos
+          integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
 
       - http:
           method: PUT
           path: todos/update
+          integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
-
-resources:
-  Resources: ${file(resources/tables.yml):migration}
