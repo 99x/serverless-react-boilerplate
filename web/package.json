@@ -4,7 +4,7 @@
   "description": "Simple todo application that uses serverless basic boilerplate as backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server"
   },
   "author": "Manoj Fernando <mj.bitwave@gmail.com>",
   "license": "MIT",

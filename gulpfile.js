@@ -38,10 +38,18 @@ gulp.task('open-website', function(done) {
     require("opn")("http://localhost:8080");
 });
 
-/* Deploy service in AWS */
-gulp.task('deploy', function() {
+/* Deploy the local database tables to AWS dynamodb */
+gulp.task('deploy-db', function() {
+    runCommand('cd serverless' + commandSeparator + ' sls dynamodb executeAll');
+});
+
+/* Deploy Lambdas and API Gateway to AWS */
+gulp.task('deploy-api', function() {
     runCommand('cd serverless' + commandSeparator + ' sls deploy -v');
 });
+
+/* Deploy service in AWS */
+gulp.task('deploy', gulpSequence(['deploy-db', 'deploy-api']));
 
 /* Start application locally */
 gulp.task('default', gulpSequence(['start-client', 'open-website', 'start-dynamodb', 'start-offline-server']));

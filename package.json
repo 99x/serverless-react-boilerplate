@@ -1,6 +1,6 @@
 {
   "name": "serverless-boilerplate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "basic boilerplate with offline development setup",
   "main": "index.js",
   "dependencies": {
