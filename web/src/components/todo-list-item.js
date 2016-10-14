@@ -13,8 +13,9 @@ export default class TodoListItem extends React.Component {
     renderTaskSection(){
         const {task, isCompleted} = this.props;
         const taskStyle = {
-            color: isCompleted? 'green' : 'red',
-            'textDecoration': isCompleted? 'line-through' : '',
+            color: isCompleted? '#2ecc71' : '#d35400',
+            textDecoration: isCompleted ? 'line-through' : '',
+            fontSize: '20px',
             cursor: 'pointer'
         };
         if(this.state.isEditing){
@@ -33,19 +34,23 @@ export default class TodoListItem extends React.Component {
         );
     }
 
-    renderActionSection(){
+    renderActionSection() {
+        const style = {
+            marginRight: '5px',
+            width: '75px'
+        };
         if(this.state.isEditing){
             return (
                 <td>
-                    <button onClick={this.onSaveClick.bind(this)}>Save</button>
-                    <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
+                    <button style={style} type="button" className="success button" onClick={this.onSaveClick.bind(this)}>Save</button>
+                    <button style={style} type="button" className="secondary button" onClick={this.onCancelClick.bind(this)}>Cancel</button>
                 </td>
             );
         }
         return (
             <td>
-                <button onClick={this.onEditClick.bind(this)}> Edit </button>
-                <button onClick={this.onDeleteClick.bind(this)}> Delete </button>
+                <button style={style} type="button" className="button" onClick={this.onEditClick.bind(this)}> Edit </button>
+                <button style={style} type="button" className="alert button" onClick={this.onDeleteClick.bind(this)}> Delete </button>
             </td>
         );
     }

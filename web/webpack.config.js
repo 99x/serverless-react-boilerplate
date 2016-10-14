@@ -1,13 +1,18 @@
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack'),
+     path = require('path');
 
 module.exports = {
     devtool: 'inline-source-map',
     entry: [
         'webpack-dev-server/client?http://127.0.0.1:8080/',
         'webpack/hot/only-dev-server',
+        'script!jquery/dist/jquery.min.js',
+        'script!foundation-sites/dist/foundation.min.js',
         './src/index.js'
     ],
+    externals: {
+        jquery: 'jQuery'
+    },
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
@@ -27,6 +32,11 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
+
     ]
 };

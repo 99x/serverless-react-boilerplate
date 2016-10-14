@@ -10,12 +10,16 @@ export default class TodoList extends React.Component {
     }
     render(){
         return (
-            <table>
-                <TodoListHeader/>
-                <tbody>
-                    {this.renderItems()}
-                </tbody>
-            </table>
+            <div>
+                <div className="row large-6 large-offset-3 medium-6 medium-offset-3 small-6 small-offset-3 columns">                   
+                    <table className="hover">
+                        <TodoListHeader/>
+                        <tbody>
+                           {this.renderItems()}
+                        </tbody>
+                    </table>                       
+                </div>               
+            </div>            
         );
     }
 }

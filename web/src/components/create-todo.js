@@ -5,9 +5,15 @@ export default class CreateTodo extends React.Component {
     render(){
         return (
             <form onSubmit={this.handleCreate.bind(this)}>
-                <input type='text' placeholder='Enter new todo item' ref='createInput'/>
-                <button>Create</button>
-            </form>
+                <div>
+                    <div className="row large-6 large-offset-3 medium-6 medium-offset-3 small-6 small-offset-3 columns">               
+                        <input type='text' placeholder='Type your task here' ref='createInput'/>                        
+                    </div>
+                    <div className="row large-6 large-offset-3 medium-6 medium-offset-3 small-6 small-offset-3 columns">
+                        <button className="expanded button">Create</button>
+                    </div>
+                </div>
+            </form>    
         );
     }
 
