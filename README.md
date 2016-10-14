@@ -100,11 +100,12 @@ npm run deploy
 Your contributions are much appriciated. 
 
 ## Release Log
+* Release v2.2.0 - Added foundation css framework for the react client
 * Release v2.1.1 - Improvements in react web app
-* Release v2.0.1 - dynamodb local table creation bug fix
-* Release v2.0.0 - added support for the latest serverless v1.0 Issues #24 #25
-* Release v1.0.3 - fixed local dynamobd get packaged for deployment
-* Release v1.0.2 - added support for serverless@1.0.0-rc.2
+* Release v2.0.1 - Dynamodb local table creation bug fix
+* Release v2.0.0 - Added support for serverless v1.0 and Issues #24 #25
+* Release v1.0.3 - Fixed local dynamobd get packaged for deployment
+* Release v1.0.2 - Added support for serverless@1.0.0-rc.2
 
 ## Links
 * [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
