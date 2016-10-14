@@ -6,7 +6,7 @@ serverless-react-boilerplate
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Boilerplate Demo
-A simple todo app built with serverless. [View Demo Site](https://evening-brushlands-67444.herokuapp.com/){:target="_blank"}
+A simple todo app built with serverless. <a href="https://evening-brushlands-67444.herokuapp.com/" target="_blank">View Demo Site</a>
 
 ## Requirements
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally
