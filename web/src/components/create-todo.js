@@ -10,7 +10,7 @@ export default class CreateTodo extends React.Component {
                         <input type='text' placeholder='Type your task here' ref='createInput'/>                        
                     </div>
                     <div className="row large-6 large-offset-3 medium-6 medium-offset-3 small-6 small-offset-3 columns">
-                        <button className="expanded button">Create</button>
+                        <button className="expanded secondary button">+ Add Item</button>
                     </div>
                 </div>
             </form>    
