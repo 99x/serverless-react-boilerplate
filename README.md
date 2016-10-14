@@ -5,6 +5,9 @@ serverless-react-boilerplate
 [![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Boilerplate Demo
+A simple todo app built with serverless. [View Demo Site](https://evening-brushlands-67444.herokuapp.com/)
+
 ## Requirements
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally
 
@@ -15,9 +18,6 @@ serverless-react-boilerplate
 * Rich request template
 * Lambda CRUD operations for a Todo application with live reload
 * React web application to utilize the API
-
-## Demo
-A simple todo app built with serverless. [Vist Demo Site](https://evening-brushlands-67444.herokuapp.com/)
 
 ## How to develop and test offline?
 We have used [serverless-offline plugin](https://github.com/dherault/serverless-offline) and [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local) in this boilerplate. You can declare your table templates and seeds in `offline/migrations` folder just like the `todo.json` template. When you spin up the offline server, these tables will be used as the datasources for your lambda functions. Once you are ready to deploy your database and api in AWS use `npm run deploy`.
