@@ -12,6 +12,7 @@ A simple todo app built with serverless. <a href="https://evening-brushlands-674
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally
 
 ## Features
+* Support serverless v1.0
 * Support offline development with dynamodb, lambda and API Gateway
 * Support local dynamodb seeds/migrations
 * Build automation in client and server to ease local development
