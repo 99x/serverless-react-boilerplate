@@ -102,6 +102,9 @@ Once you have tested it on dev stage you can do a final production stage release
 ```
 gulp deploy --stage prod
 ```
+If you want to test your React app with the online API and Database, you may have to change the, **BASE_URL** of the react app
+found in **web/src/components/app.js**. Change its value from **http://localhost:3000** to your **APIGateway uri**.
+
 
 ## Contribution
 Your contributions are much appriciated. 
