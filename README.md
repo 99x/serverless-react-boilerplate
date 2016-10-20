@@ -80,15 +80,22 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
   npm run db-setup
 ```
-* Run the client and server
+* Run the client and server locally
 ```
  gulp serve
 ```
 * Visit `http://localhost:8080`
 
 ## Deploying to AWS
-When you are ready to deploy your database and api to AWS, run following command.
-This will deploy your local dabase and local API Gateway to AWS to a given stage.
+When you are ready to deploy your database and api to AWS, you can create multiple 
+APIGateways for different service level stages. For example you can create "dev" and "production" stages.
+When you deploy to a specific stage, it will create a separate database tables for that stage.
+
+Following command will deploy your local dabase and local API Gateway to AWS in dev service stage.
+```
+gulp deploy --stage dev
+```
+Once you have tested it on dev stage you can do a final production stage release by,
 ```
 gulp deploy --stage prod
 ```
