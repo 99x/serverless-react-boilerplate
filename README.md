@@ -82,15 +82,15 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
 * Run the client and server
 ```
- npm run app
+ gulp serve
 ```
 * Visit `http://localhost:8080`
 
 ## Deploying to AWS
 When you are ready to deploy your database and api to AWS, run following command.
-This will deploy your local dabase and local API Gateway to AWS.
+This will deploy your local dabase and local API Gateway to AWS to a given stage.
 ```
-npm run deploy
+gulp deploy --stage prod
 ```
 
 ## Contribution
