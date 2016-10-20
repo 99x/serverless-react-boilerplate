@@ -1,11 +1,14 @@
 'use strict';
 
 var Promise = require('bluebird'),
+    dotenv = require('dotenv').config(),
     db = require('../../../database/dynamodb');
+
+const DB_PREFIX = process.env.IS_OFFLINE ? "dev" : process.env.REMOTE_STAGE;
 
 function getTodo(id) {
     return db('query', {
-        TableName: 'todos',
+        TableName: DB_PREFIX + 'todos',
         KeyConditionExpression: '#id = :id',
         ExpressionAttributeValues: {
             ':id': id
@@ -18,13 +21,13 @@ function getTodo(id) {
 
 function getAllTodos() {
     return db('scan', {
-        TableName: 'todos'
+        TableName: DB_PREFIX + 'todos'
     });
 }
 
 function createItem(data) {
     return db('put', {
-        TableName: 'todos',
+        TableName: DB_PREFIX + 'todos',
         Item: {
             "id": data.id,
             "task": data.task,
@@ -35,29 +38,33 @@ function createItem(data) {
 
 function updateItem(data) {
     return db('update', {
-        TableName: 'todos',
+        TableName: DB_PREFIX + 'todos',
         Key: {
             id: data.id
         },
         UpdateExpression: 'set task = :task',
-        ExpressionAttributeValues: {':task': data.task}
+        ExpressionAttributeValues: {
+            ':task': data.task
+        }
     });
 }
 
 function updateStatus(data) {
     return db('update', {
-        TableName: 'todos',
+        TableName: DB_PREFIX + 'todos',
         Key: {
             id: data.id
         },
         UpdateExpression: 'set isCompleted = :isCompleted',
-        ExpressionAttributeValues: {':isCompleted': data.isCompleted}
+        ExpressionAttributeValues: {
+            ':isCompleted': data.isCompleted
+        }
     });
 }
 
-function deleteItem(params){
+function deleteItem(params) {
     return db('delete', {
-        TableName: 'todos',
+        TableName: DB_PREFIX + 'todos',
         Key: {
             id: params.id
         }

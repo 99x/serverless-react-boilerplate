@@ -1,27 +1,27 @@
 'use strict';
 
-var todo = require('./lib/todo');
+var todo = require('./lib/todo'),
+    parser = require('../parser');
 
-module.exports.todo = function(event, context, cb) {
-    var params = JSON.parse(event.params || "{}"),
-        path = event.path,
-        data = event.data;
+module.exports.todo = (event, context, cb) => {
+    var event = parser.parseEvent(event),
+        path = event.path;
 
     switch (path) {
         case '/todos':
-            todo.create(data, context);
+            todo.create(event, context);
             break;
         case '/todos/update':
-            todo.update(data, context);
+            todo.update(event, context);
             break;
         case '/todos/status':
-            todo.status(data, context);
+            todo.status(event, context);
             break;
         case '/todos/getAll':
-            todo.getAll(params, context);
+            todo.getAll(event, context);
             break;
         case '/todos/delete/{id}':
-            todo.delete(params, context);
+            todo.delete(event, context);
             break;
         default:
             context.fail('Invalid api call');

@@ -3,7 +3,9 @@ var gulp = require('gulp'),
     commandSeparator = isWin ? '&' : ';',
     webpack = require('webpack'),
     exec = require('child_process').exec,
-    gulpSequence = require('gulp-sequence');
+    util = require('gulp-util'),
+    gulpSequence = require('gulp-sequence'),
+    stage = null;
 
 function runCommand(cmd, done) {
     var ls = exec(cmd);
@@ -39,17 +41,18 @@ gulp.task('open-website', function(done) {
 });
 
 /* Deploy the local database tables to AWS dynamodb */
-gulp.task('deploy-db', function() {
-    runCommand('cd serverless' + commandSeparator + ' sls dynamodb executeAll');
+gulp.task('deploy-db', function(cb) {
+    stage = (util.env.stage) ? "--stage " + util.env.stage : "";
+    runCommand('cd serverless' + commandSeparator + ' sls dynamodb executeAll ' + stage);
 });
 
 /* Deploy Lambdas and API Gateway to AWS */
-gulp.task('deploy-api', function() {
-    runCommand('cd serverless' + commandSeparator + ' sls deploy -v');
+gulp.task('deploy-api', function(cb) {
+    runCommand('cd serverless' + commandSeparator + ' sls deploy ' + stage + ' -v');
 });
 
 /* Deploy service in AWS */
 gulp.task('deploy', gulpSequence(['deploy-db', 'deploy-api']));
 
 /* Start application locally */
-gulp.task('default', gulpSequence(['start-client', 'open-website', 'start-dynamodb', 'start-offline-server']));
+gulp.task('serve', gulpSequence(['start-client', 'open-website', 'start-dynamodb', 'start-offline-server']));

@@ -21,8 +21,8 @@ package:
 provider:
   name: aws
   runtime: nodejs4.3
-  stage: dev
   region: us-east-1
+  stage: dev
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -31,15 +31,20 @@ provider:
         - "arn:aws:dynamodb:us-east-1:*"
 
 plugins:
-  - serverless-dynamodb-local
   - serverless-offline
+  - serverless-dynamodb-local
+  - serverless-plugin-write-env-vars
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   dynamodb:
     start:
       migration: true
     migration:
       dir: offline/migrations
+      table_prefix: ${self:custom.stage}
+  writeEnvVars:
+    REMOTE_STAGE: ${self:custom.stage}
 
 functions:
   todo:

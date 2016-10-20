@@ -2,31 +2,31 @@
 
 var helper = require('./helper');
 
-module.exports.create = (data, context) => {
-    helper.createItem(data).then(result => {
+module.exports.create = (event, context) => {
+    helper.createItem(event.data).then(result => {
         context.succeed({});
     }).catch(err => {
         context.fail("Error: " + err);
     })
 };
 
-module.exports.update = (data, context) => {
-    helper.updateItem(data).then(result => {
+module.exports.update = (event, context) => {
+    helper.updateItem(event.data).then(result => {
         context.succeed({});
     }).catch(err => {
         context.fail("Error: " + err);
     })
 };
 
-module.exports.status = (data, context) => {
-    helper.updateStatus(data).then(result => {
+module.exports.status = (event, context) => {
+    helper.updateStatus(event.data).then(result => {
         context.succeed({});
     }).catch(err => {
         context.fail("Error: " + err);
     })
 };
 
-module.exports.getAll = (params, context) => {
+module.exports.getAll = (event, context) => {
     helper.getAllTodos().then(todos => {
         context.succeed({
             result: todos
@@ -36,8 +36,8 @@ module.exports.getAll = (params, context) => {
     });
 };
 
-module.exports.delete = (params, context) => {
-    helper.deleteItem(params).then(result => {
+module.exports.delete = (event, context) => {
+    helper.deleteItem(event.params).then(result => {
         context.succeed({});
     }).catch(err => {
         context.fail("Error: " + err);
