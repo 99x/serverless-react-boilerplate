@@ -104,6 +104,7 @@ gulp deploy --stage prod
 Your contributions are much appriciated. 
 
 ## Release Log
+* Release v3.0.0 - Added environment variables for database table names &  Feature to deploy in multiple APIGateway service level stages.
 * Release v2.2.0 - Added foundation css framework for the react client
 * Release v2.1.1 - Improvements in react web app
 * Release v2.0.1 - Dynamodb local table creation bug fix
