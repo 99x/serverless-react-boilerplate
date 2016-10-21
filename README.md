@@ -13,7 +13,8 @@ serverless-react-boilerplate
 * Support offline development with dynamodb, lambda and API Gateway
 * Support local dynamodb seeds/migrations
 * Build automation in client and server to ease local development
-* Rich request template
+* Deploy to multiple APIGateways
+* Environment variables with dotenv 
 * Lambda CRUD operations for a Todo application with live reload
 * React web application to utilize the API
 
