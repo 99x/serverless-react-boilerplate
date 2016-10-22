@@ -1,7 +1,8 @@
 'use strict';
 
 var todo = require('./lib/todo'),
-    parser = require('../parser');
+    parser = require('../parser'),
+    env = require('dotenv').config();
 
 module.exports.todo = (event, context, cb) => {
     var event = parser.parseEvent(event),
