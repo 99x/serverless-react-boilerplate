@@ -106,6 +106,19 @@ gulp deploy --stage prod
 If you want to test your React app with the online API and Database, you may have to change the, **BASE_URL** of the react app
 found in **web/src/components/app.js**. Change its value from **http://localhost:3000** to your **APIGateway uri**.
 
+## Environment Variables 
+You can define environment variables for you application in the **custom** section. For example if you need to have a database 
+connection string in the environment and use it in your lambda function, define it as follows.
+
+```
+custom
+  writeEnvVars:
+    DB_CONNECTION_STRING: connection_string_here
+```
+Once you have deployed the functions in AWS you can access your connection string as follows,
+```
+process.env.DB_CONNECTION_STRING
+```
 
 ## Contribution
 Your contributions are much appriciated. 
