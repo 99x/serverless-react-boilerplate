@@ -15,7 +15,7 @@
     "serverless-plugin-write-env-vars": "1.0.1"
   },
   "devDependencies": {
-    "serverless-offline": "git+https://github.com/dherault/serverless-offline.git/#serverless_v1",
+    "serverless-offline": "git+https://github.com/dherault/serverless-offline.git",
     "serverless-dynamodb-local": "0.2.17"
   }
 }
