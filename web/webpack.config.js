@@ -31,12 +31,25 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+            },
+            output: {
+                comments: false,
+            },
+        }),
+        new webpack.optimize.DedupePlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new webpack.ProvidePlugin({
-            '$': 'jquery',
-            'jQuery': 'jquery'
-        })
-
+        new webpack.DefinePlugin({
+            'process.env':{
+                'NODE_ENV': JSON.stringify('development'),
+                'STAGE': JSON.stringify('local'),
+                'ITEMS_DB_NAME': JSON.stringify('local-items'),
+                'BASE_URL': JSON.stringify('https://API-ID.execute-api.us-east-1.amazonaws.com/local'),
+                'AUTH_URL': JSON.stringify('https://AUTH-API-ID.execute-api.us-east-1.amazonaws.com/local')
+            }
+        }),
     ]
 };

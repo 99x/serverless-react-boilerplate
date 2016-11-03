@@ -11,8 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.6.1",
     "bluebird": "^3.4.6",
-    "dotenv": "2.0.0",
-    "serverless-plugin-write-env-vars": "1.0.1"
+    "dotenv": "2.0.0"
   },
   "devDependencies": {
     "serverless-offline": "git+https://github.com/dherault/serverless-offline.git",

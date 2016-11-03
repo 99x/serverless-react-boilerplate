@@ -1,0 +1,67 @@
+{
+  "Table": {
+    "TableName": "-items",
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "id",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "userId",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "itemDate",
+        "AttributeType": "S"
+      }
+    ],
+    "KeySchema": [
+      {
+        "AttributeName": "userId",
+        "KeyType": "HASH"
+      },
+      {
+        "AttributeName": "id",
+        "KeyType": "RANGE"
+      }
+    ],
+    "LocalSecondaryIndexes": [
+      {
+        "IndexName": "UserIndex",
+        "KeySchema": [
+          {
+            "AttributeName": "userId",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "itemDate",
+            "KeyType": "RANGE"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        }
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
+    }
+  },
+  "Seeds": [
+    {
+      "id": "1",
+      "itemName": "Item 1",
+      "userId": "1",
+      "itemDate": "2016-08-27T18:12:00.000",
+      "enabled": true
+    },
+    {
+      "id": "2",
+      "itemName": "Item 2",
+      "userId": "1",
+      "itemDate": "2016-08-27T01:23:00.000",
+      "enabled": true
+    }
+  ]
+}

@@ -19,10 +19,12 @@ serverless-react-boilerplate
 * React web application to utilize the API
 
 ## Demo
-A todo app built with serverless. [View Demo Site](https://evening-brushlands-67444.herokuapp.com/)
+A todo app built with serverless. [View Demo Site](http://sls-react-auth.s3-website-us-east-1.amazonaws.com/)
 
 ## How to develop and test offline?
 We have used [serverless-offline plugin](https://github.com/dherault/serverless-offline) and [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local) in this boilerplate. You can declare your table templates and seeds in `offline/migrations` folder just like the `todo.json` template. When you spin up the offline server, these tables will be used as the datasources for your lambda functions. Once you are ready to deploy your database and api in AWS use `npm run deploy`.
+
+Note by Jeremy Cummins: testing offline will not work with authentication.
 
 ## Production vs Offline
 Thanks to the offline plugin's environment variable `IS_OFFLINE` we can select between local dynamodb and aws dynamodb. 
@@ -68,6 +70,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 
 ```
 ## Installation & Usage
+* Clone https://github.com/jcummins54/serverless-authentication-boilerplate and follow README instructions for installation.
 * Clone this repo.
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
 * Install webpack and serverless globally.
@@ -93,7 +96,10 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ## Deploying to AWS
 When you are ready to deploy your database and api to AWS, you can create multiple 
 APIGateways for different service level stages. For example you can create "dev" and "production" stages.
-When you deploy to a specific stage, it will create a separate database tables for that stage.
+When you deploy to a specific stage, it will create separate database tables for that stage.
+
+In **serverless/serverless.yml** replace **AWS-ACCOUNT-ID** in the custom authorizer arn. 
+The arn should match the serverless-authentication-boilerplate arn for the stage you will be deploying.
 
 Following command will deploy your local dabase and local API Gateway to AWS in dev service stage.
 ```
@@ -103,21 +109,21 @@ Once you have tested it on dev stage you can do a final production stage release
 ```
 gulp deploy --stage prod
 ```
-If you want to test your React app with the online API and Database, you may have to change the, **BASE_URL** of the react app
-found in **web/src/components/app.js**. Change its value from **http://localhost:3000** to your **APIGateway uri**.
+
+Replace the **API-ID** in the **BASE_URL** key in **web/webpack.config.js**. Make sure the region (i.e. 'us-east-1') and stage match your deployment.
+Get the authentication endpoint ID from serverless-authentication-boilerplate and replace the **AUTH-ENDPOINT-ID** in the **AUTH_URL** key in **web/webpack.config.js**. Match the region and stage here as well.
 
 ## Environment Variables 
-You can define environment variables for you application in the **custom** section. For example if you need to have a database 
-connection string in the environment and use it in your lambda function, define it as follows.
+You can define environment variables for you application in the **custom** section. e.g. the DB table name is currently defined here as ITEMS_DB_NAME.
 
 ```
 custom
   writeEnvVars:
-    DB_CONNECTION_STRING: connection_string_here
+    ITEMS_DB_NAME: ${self:custom.stage}-items
 ```
-Once you have deployed the functions in AWS you can access your connection string as follows,
+Once you have deployed the functions in AWS these environment variables will be available in the process.env object.
 ```
-process.env.DB_CONNECTION_STRING
+process.env.ITEMS_DB_NAME
 ```
 
 ## Contribution
