@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "Simple itemlist application that uses serverless basic boilerplate as backend",
+  "description": "Simple todolist application that uses serverless basic boilerplate as backend",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"

@@ -45,10 +45,10 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env':{
                 'NODE_ENV': JSON.stringify('development'),
-                'STAGE': JSON.stringify('local'),
-                'ITEMS_DB_NAME': JSON.stringify('local-items'),
-                'BASE_URL': JSON.stringify('https://API-ID.execute-api.us-east-1.amazonaws.com/local'),
-                'AUTH_URL': JSON.stringify('https://AUTH-API-ID.execute-api.us-east-1.amazonaws.com/local')
+                'STAGE': JSON.stringify('dev'),
+                'TODOS_DB_NAME': JSON.stringify('dev-todos'),
+                'BASE_URL': JSON.stringify('https://API-ID.execute-api.us-east-1.amazonaws.com/dev'),
+                'AUTH_URL': JSON.stringify('https://AUTH-API-ID.execute-api.us-east-1.amazonaws.com/dev')
             }
         }),
     ]

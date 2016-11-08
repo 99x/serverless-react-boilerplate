@@ -1,7 +1,7 @@
 import React from 'react';
-import ItemListHeader from './item-list-header';
+import TodoListHeader from './todo-list-header';
 
-export default class ItemListItem extends React.Component {
+export default class TodoListItem extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -31,7 +31,7 @@ export default class ItemListItem extends React.Component {
     }
 
     render(){
-         const {id, userId, itemName, itemDate, createdAt, enabled} = this.props;
+         const {id, userId, todoName, todoDate, createdAt, enabled} = this.props;
          const eventStyle = {
             color: enabled? '#d35400' : '#2ecc71',
             textDecoration: enabled ? '' : 'line-through',
@@ -43,12 +43,12 @@ export default class ItemListItem extends React.Component {
                 <tr>
                     <td>
                         <form onSubmit={this.onSaveClick.bind(this)}>
-                            <input type='text' defaultValue={itemName} ref='nameInput'/>
+                            <input type='text' defaultValue={todoName} ref='nameInput'/>
                         </form>
                     </td>
                     <td>
                         <form onSubmit={this.onSaveClick.bind(this)}>
-                            <input type='text' defaultValue={itemDate} ref='dateInput'/>
+                            <input type='text' defaultValue={todoDate} ref='dateInput'/>
                         </form>
                     </td>
                     {this.renderActionSection()}
@@ -57,10 +57,10 @@ export default class ItemListItem extends React.Component {
         }
         return (
             <tr>
-                <td style={eventStyle} onClick={this.props.toggleItem.bind(this, this.props)}>
-                    {itemName}
+                <td style={eventStyle} onClick={this.props.toggleTodo.bind(this, this.props)}>
+                    {todoName}
                 </td>
-                <td>{itemDate}</td>
+                <td>{todoDate}</td>
                 {this.renderActionSection()}
             </tr>
         );
@@ -76,17 +76,17 @@ export default class ItemListItem extends React.Component {
 
     onSaveClick(e){
         e.preventDefault();
-        const oldItem = this.props;
-        var newItem = {
-            "itemName": this.refs.nameInput.value,
-            "itemDate": this.refs.dateInput.value
+        const oldTodo = this.props;
+        var newTodo = {
+            "todoName": this.refs.nameInput.value,
+            "todoDate": this.refs.dateInput.value
         };
-        this.props.saveItem(oldItem, newItem);
+        this.props.saveTodo(oldTodo, newTodo);
         this.setState({isEditing:false});
     }
 
     onDeleteClick(e){
         e.preventDefault();
-        this.props.deleteItem(this.props);
+        this.props.deleteTodo(this.props);
     }
 }

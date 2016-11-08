@@ -2,9 +2,9 @@
 
 var Promise = require('bluebird'),
     db = require('../../../database/dynamodb'),
-    tablename = process.env.ITEMS_DB_NAME;
+    tablename = process.env.TODOS_DB_NAME;
 
-function getItem(id) {
+function getTodo(id) {
     return db('query', {
         TableName: tablename,
         KeyConditionExpression: '#id = :id',
@@ -17,7 +17,7 @@ function getItem(id) {
     });
 }
 
-function getAllItems(event) {
+function getAllTodos(event) {
     var params = {
         TableName: tablename,
         IndexName : 'UserIndex',
@@ -40,7 +40,7 @@ function guid() {
     });
 }
 
-function createItem(event) {
+function createTodo(event) {
     var data = event.data;
     data.id = guid();
     return db('put', {
@@ -49,7 +49,7 @@ function createItem(event) {
     });
 }
 
-function updateItem(event) {
+function updateTodo(event) {
     var data = event.data;
     return db('update', {
         TableName: tablename,
@@ -57,8 +57,8 @@ function updateItem(event) {
             id: data.id,
             userId: data.userId
         },
-        UpdateExpression: 'set itemName = :itemName, itemDate = :itemDate',
-        ExpressionAttributeValues: {':itemName': data.itemName, ':itemDate': data.itemDate}
+        UpdateExpression: 'set todoName = :todoName, todoDate = :todoDate',
+        ExpressionAttributeValues: {':todoName': data.todoName, ':todoDate': data.todoDate}
     });
 }
 
@@ -75,7 +75,7 @@ function updateStatus(event) {
     });
 }
 
-function deleteItem(event){
+function deleteTodo(event){
     return db('delete', {
         TableName: tablename,
         Key: {
@@ -86,10 +86,10 @@ function deleteItem(event){
 }
 
 module.exports = {
-    getItem: getItem,
-    getAllItems: getAllItems,
-    updateItem: updateItem,
+    getTodo: getTodo,
+    getAllTodos: getAllTodos,
+    updateTodo: updateTodo,
     updateStatus: updateStatus,
-    createItem: createItem,
-    deleteItem: deleteItem
+    createTodo: createTodo,
+    deleteTodo: deleteTodo
 };

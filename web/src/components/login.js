@@ -8,13 +8,13 @@ require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
 const AUTH_URL = process.env.AUTH_URL.replace(/{stage}/, process.env.STAGE);
-var items = [];
+var todos = [];
 
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items
+            todos
         };
         this.init();
     }
@@ -37,7 +37,7 @@ export default class Login extends React.Component {
             localStorage.setItem('authorization_token', params.authorization_token);
             localStorage.setItem('refresh_token', params.refresh_token);
             localStorage.setItem('user_id', params.id);
-            browserHistory.replace('/item-list');
+            browserHistory.replace('/todo-list');
         }       
     }
 

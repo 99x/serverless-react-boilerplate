@@ -1,6 +1,6 @@
 {
   "Table": {
-    "TableName": "-items",
+    "TableName": "-todo",
     "AttributeDefinitions": [
       {
         "AttributeName": "id",
@@ -11,7 +11,7 @@
         "AttributeType": "S"
       },
       {
-        "AttributeName": "itemDate",
+        "AttributeName": "todoDate",
         "AttributeType": "S"
       }
     ],
@@ -34,7 +34,7 @@
             "KeyType": "HASH"
           },
           {
-            "AttributeName": "itemDate",
+            "AttributeName": "todoDate",
             "KeyType": "RANGE"
           }
         ],
@@ -51,16 +51,16 @@
   "Seeds": [
     {
       "id": "1",
-      "itemName": "Item 1",
+      "todoName": "Todo 1",
       "userId": "1",
-      "itemDate": "2016-08-27T18:12:00.000",
+      "todoDate": "2016-08-27T18:12:00.000",
       "enabled": true
     },
     {
       "id": "2",
-      "itemName": "Item 2",
+      "todoName": "Todo 2",
       "userId": "1",
-      "itemDate": "2016-08-27T01:23:00.000",
+      "todoDate": "2016-08-27T01:23:00.000",
       "enabled": true
     }
   ]

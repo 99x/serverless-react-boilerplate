@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: aws-react-auth-boilerplate
+service: aws-react-boilerplate
 
 package:
   exclude:
@@ -50,15 +50,15 @@ custom:
       dir: offline/migrations
       table_prefix: ${self:custom.stage}
   writeEnvVars:
-    ITEMS_DB_NAME: ${self:custom.stage}-items
+    TODOS_DB_NAME: ${self:custom.stage}-todos
 
 functions:
-  items:
-    handler: handlers/items/handler.items
+  todos:
+    handler: handlers/todo/handler.todos
     events:
       - http:
           method: GET
-          path: items/{userId}/register          
+          path: todos/{userId}/register          
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
@@ -66,7 +66,7 @@ functions:
 
       - http:
           method: GET
-          path: items/{userId}/getAll          
+          path: todos/{userId}/getAll          
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
@@ -74,7 +74,7 @@ functions:
 
       - http:
           method: DELETE
-          path: items/{userId}/delete/{id}
+          path: todos/{userId}/delete/{id}
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
@@ -82,7 +82,7 @@ functions:
 
       - http:
           method: POST
-          path: items/{userId}/create
+          path: todos/{userId}/create
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
@@ -90,7 +90,7 @@ functions:
 
       - http:
           method: PUT
-          path: items/{userId}/update
+          path: todos/{userId}/update
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
@@ -98,7 +98,7 @@ functions:
 
       - http:
           method: PUT
-          path: items/{userId}/status
+          path: todos/{userId}/status
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
@@ -114,7 +114,7 @@ resources:
           AttributeType: S
         - AttributeName: userId
           AttributeType: S
-        - AttributeName: itemDate
+        - AttributeName: todoDate
           AttributeType: S
         KeySchema:
         - AttributeName: userId
@@ -126,11 +126,11 @@ resources:
           KeySchema:
           - AttributeName: userId
             KeyType: HASH
-          - AttributeName: itemDate
+          - AttributeName: todoDate
             KeyType: RANGE
           Projection:
             ProjectionType: ALL
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:custom.stage}-items
+        TableName: ${self:custom.stage}-todos

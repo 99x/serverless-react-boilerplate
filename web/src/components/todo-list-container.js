@@ -3,8 +3,8 @@ import React from 'react';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import Logout from './logout';
-import CreateItem from './create-item';
-import ItemList from './item-list';
+import CreateTodo from './create-todo';
+import TodoList from './todo-list';
 import Providers from './providers';
 
 // load foundation
@@ -13,13 +13,13 @@ $(document).foundation();
 
 const BASE_URL = process.env.BASE_URL.replace(/{stage}/, process.env.STAGE);
 
-var items = [];
+var todos = [];
 
-export default class ItemListContainer extends React.Component {
+export default class TodoListContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items
+            todos
         };
         this.init();
     }
@@ -43,12 +43,12 @@ export default class ItemListContainer extends React.Component {
             browserHistory.replace('/');
         }
 
-        axios.get(BASE_URL + '/items/' + self.getUserId() + '/getAll', {
+        axios.get(BASE_URL + '/todos/' + self.getUserId() + '/getAll', {
             headers: {
                 Authorization: self.getAuthorizationToken()
             }
         }).then(function(response) {
-            self.setState({items: response.data.result.Items});            
+            self.setState({todos: response.data.result.Items});            
         }).catch(function(error) {
             console.log(error);
             // Not authorized, return to login page
@@ -63,10 +63,10 @@ export default class ItemListContainer extends React.Component {
                     <Logout logout={this.logout.bind(this)}/>
                 </div>        
                 <div className="row large-6 large-offset-5 medium-6 medium-offset-5 small-6 small-offset-5 columns">
-                    <h3>My Item List</h3>
+                    <h3>My Todo List</h3>
                 </div>
-                <CreateItem createItem={this.createItem.bind(this)}/>
-                <ItemList items={this.state.items} toggleItem={this.toggleItem.bind(this)} saveItem={this.saveItem.bind(this)} deleteItem={this.deleteItem.bind(this)}/>
+                <CreateTodo createTodo={this.createTodo.bind(this)}/>
+                <TodoList todos={this.state.todos} toggleTodo={this.toggleTodo.bind(this)} saveTodo={this.saveTodo.bind(this)} deleteTodo={this.deleteTodo.bind(this)}/>
             </div>
         );
     }
@@ -78,31 +78,31 @@ export default class ItemListContainer extends React.Component {
         browserHistory.replace('/');
     }
 
-    createItem(event) {
+    createTodo(event) {
         var self = this;
         event.userId = self.getUserId();               
-        axios.post(BASE_URL + '/items/' + self.getUserId() + '/create', event, {
+        axios.post(BASE_URL + '/todos/' + self.getUserId() + '/create', event, {
             headers: {
                 Authorization: this.getAuthorizationToken()
             }
         }).then(function(response) {
-            self.state.items.unshift(response.data);
-            self.setState({items: self.state.items});
+            self.state.todos.unshift(response.data);
+            self.setState({todos: self.state.todos});
         })
         .catch(function(error) {
             console.log(error);
         });
     }
 
-    toggleItem(event) {
+    toggleTodo(event) {
         var self = this;
-        const foundItem = _.find(this.state.items, currentItem => currentItem.id === event.id);
-        foundItem.enabled = !foundItem.enabled;
-        this.setState({ items: this.state.items });
-        axios.put(BASE_URL + '/items/' + self.getUserId() + '/status', {
+        const foundTodo = _.find(this.state.todos, currentTodo => currentTodo.id === event.id);
+        foundTodo.enabled = !foundTodo.enabled;
+        this.setState({ todos: this.state.todos });
+        axios.put(BASE_URL + '/todos/' + self.getUserId() + '/status', {
             id: event.id,
             userId: event.userId,
-            enabled: foundItem.enabled            
+            enabled: foundTodo.enabled            
         }, {
             headers: {
                 Authorization: this.getAuthorizationToken()
@@ -113,17 +113,17 @@ export default class ItemListContainer extends React.Component {
         });
     }
 
-    saveItem(oldItem, newItem) {
+    saveTodo(oldTodo, newTodo) {
         var self = this;
-        const foundItem = _.find(self.state.items, event => event.id === oldItem.id);
-        foundItem.itemName = newItem.itemName;
-        foundItem.itemDate = newItem.itemDate;
-        self.setState({items: self.state.items});
-        axios.put(BASE_URL + '/items/' + self.getUserId() + '/update', {
-            id: oldItem.id,
-            userId: oldItem.userId,
-            itemName: newItem.itemName,            
-            itemDate: newItem.itemDate
+        const foundTodo = _.find(self.state.todos, event => event.id === oldTodo.id);
+        foundTodo.todoName = newTodo.todoName;
+        foundTodo.todoDate = newTodo.todoDate;
+        self.setState({todos: self.state.todos});
+        axios.put(BASE_URL + '/todos/' + self.getUserId() + '/update', {
+            id: oldTodo.id,
+            userId: oldTodo.userId,
+            todoName: newTodo.todoName,            
+            todoDate: newTodo.todoDate
         }, {
             headers: {
                 Authorization: this.getAuthorizationToken()
@@ -134,11 +134,11 @@ export default class ItemListContainer extends React.Component {
         });
     }
 
-    deleteItem(event) {
+    deleteTodo(event) {
         var self = this;
-        _.remove(self.state.items, currentItem => currentItem.id === event.id);
-        self.setState({items: self.state.items});
-        axios.delete(BASE_URL + '/items/' + self.getUserId() + '/delete/' + event.id, {
+        _.remove(self.state.todos, currentTodo => currentTodo.id === event.id);
+        self.setState({todos: self.state.todos});
+        axios.delete(BASE_URL + '/todos/' + self.getUserId() + '/delete/' + event.id, {
             headers: {
                 Authorization: this.getAuthorizationToken()
             }

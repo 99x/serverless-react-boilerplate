@@ -17,6 +17,7 @@ serverless-react-boilerplate
 * Environment variables with dotenv 
 * Lambda CRUD operations for a Todo application with live reload
 * React web application to utilize the API
+* API authentication per individual user
 
 ## Demo
 A todo app built with serverless. [View Demo Site](http://sls-react-auth.s3-website-us-east-1.amazonaws.com/)
@@ -70,8 +71,9 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 
 ```
 ## Installation & Usage
-* Clone https://github.com/jcummins54/serverless-authentication-boilerplate and follow README instructions for installation.
-* Clone this repo.
+* Clone or download the repository `https://github.com/jcummins54/serverless-authentication-boilerplate/`.
+* Switch to the branch `git checkout -b react-authenticate`, get the latest `git pull origin react-authenticate` and follow README instructions for installation.
+* Clone this repo and switch to this branch `react-authenticate`.
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
 * Install webpack and serverless globally.
 ```
@@ -114,16 +116,16 @@ Replace the **API-ID** in the **BASE_URL** key in **web/webpack.config.js**. Mak
 Get the authentication endpoint ID from serverless-authentication-boilerplate and replace the **AUTH-ENDPOINT-ID** in the **AUTH_URL** key in **web/webpack.config.js**. Match the region and stage here as well.
 
 ## Environment Variables 
-You can define environment variables for you application in the **custom** section. e.g. the DB table name is currently defined here as ITEMS_DB_NAME.
+You can define environment variables for you application in the **custom** section. e.g. the DB table name is currently defined here as TODOS_DB_NAME.
 
 ```
 custom
   writeEnvVars:
-    ITEMS_DB_NAME: ${self:custom.stage}-items
+    TODOS_DB_NAME: ${self:custom.stage}-todos
 ```
 Once you have deployed the functions in AWS these environment variables will be available in the process.env object.
 ```
-process.env.ITEMS_DB_NAME
+process.env.TODOS_DB_NAME
 ```
 
 ## Contribution
