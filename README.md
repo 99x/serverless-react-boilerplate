@@ -71,7 +71,7 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 
 ```
 ## Installation & Usage
-* Clone or download the repository `https://github.com/jcummins54/serverless-authentication-boilerplate/`.
+* Clone or download the repository https://github.com/jcummins54/serverless-authentication-boilerplate/
 * Switch to the branch `git checkout -b react-authenticate`, get the latest `git pull origin react-authenticate` and follow README instructions for installation.
 * Clone this repo and switch to this branch `react-authenticate`.
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
