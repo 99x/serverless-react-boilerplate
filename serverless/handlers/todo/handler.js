@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const todos = require('./lib/todo');
 
-module.exports.todos = function (event, context) {
+module.exports.todo = function (event, context) {
   var path = event.path;
   event.params = JSON.parse(event.params || "{}");
 

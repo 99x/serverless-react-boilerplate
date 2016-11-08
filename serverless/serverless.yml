@@ -23,7 +23,7 @@ provider:
   name: aws
   runtime: nodejs4.3
   region: us-east-1
-  stage: local
+  stage: dev
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -53,8 +53,8 @@ custom:
     TODOS_DB_NAME: ${self:custom.stage}-todos
 
 functions:
-  todos:
-    handler: handlers/todo/handler.todos
+  todo:
+    handler: handlers/todo/handler.todo
     events:
       - http:
           method: GET
