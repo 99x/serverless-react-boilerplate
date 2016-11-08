@@ -23,7 +23,7 @@ provider:
   name: aws
   runtime: nodejs4.3
   region: us-east-1
-  stage: local
+  stage: dev
   iamRoleStatements:
     - Effect: "Allow"
       Action:
