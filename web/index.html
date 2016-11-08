@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Todo App</title>    
+    <meta charset="utf-8">        
+    <title>Serverless React Boilerplate with Authorization</title>
+    <script type="text/javascript">
+    // This code is to parse hash bang urls for hosting on an s3 bucket. See top rated answer here:
+    // http://stackoverflow.com/questions/16267339/s3-static-website-hosting-route-all-paths-to-index-html
+    var hash = location.hash.substring(1);
+    if (hash.indexOf("!/") !== -1) {
+        hash = hash.replace("!/", "");
+        history.pushState({}, hash, hash);
+    }
+    </script>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<body>    
     <div id="app"/>
     <script src="bundle.js"></script>
 </div>

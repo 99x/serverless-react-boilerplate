@@ -1,30 +1,37 @@
 'use strict';
 
-var todo = require('./lib/todo'),
-    parser = require('../parser'),
-    env = require('dotenv').config();
+// Config
+require('dotenv').config();
 
-module.exports.todo = (event, context, cb) => {
-    var event = parser.parseEvent(event),
-        path = event.path;
+const todos = require('./lib/todo');
 
-    switch (path) {
-        case '/todos':
-            todo.create(event, context);
-            break;
-        case '/todos/update':
-            todo.update(event, context);
-            break;
-        case '/todos/status':
-            todo.status(event, context);
-            break;
-        case '/todos/getAll':
-            todo.getAll(event, context);
-            break;
-        case '/todos/delete/{id}':
-            todo.delete(event, context);
-            break;
-        default:
-            context.fail('Invalid api call');
-    }
+module.exports.todos = function (event, context) {
+  var path = event.path;
+  event.params = JSON.parse(event.params || "{}");
+
+  switch (path) {
+        // '/todos/{userId}/register' is called on login by the
+        // serverless-authentication-boilerplate callback method before returning.
+        // This ensures that the client cannot change the userId authorized by the login.
+    case '/todos/{userId}/register':
+      context.succeed('Registered API usage');
+      break;
+    case '/todos/{userId}/getAll':
+      todos.getAll(event, context);
+      break;
+    case '/todos/{userId}/create':
+      todos.create(event, context);
+      break;
+    case '/todos/{userId}/update':
+      todos.update(event, context);
+      break;
+    case '/todos/{userId}/status':
+      todos.status(event, context);
+      break;
+    case '/todos/{userId}/delete/{id}':
+      todos.delete(event, context);
+      break;
+    default:
+      context.fail('Invalid api call');
+  }
 };

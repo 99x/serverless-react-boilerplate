@@ -1,38 +1,67 @@
 {
-	"Table": {
-		"TableName": "todos",
-		"KeySchema": [
-			{
-				"AttributeName": "id",
-				"KeyType": "HASH"
-			}
-		],
-		"AttributeDefinitions": [
-			{
-				"AttributeName": "id",
-				"AttributeType": "S"
-			}
-		],
-		"ProvisionedThroughput": {
-			"ReadCapacityUnits": 1,
-			"WriteCapacityUnits": 1
-		}
-	},
-	"Seeds": [
-		{
-			"id": "c796d733-9779-45c5-a130-20fd1fd0b652",
-	        "task": "Wake up",
-	        "isCompleted": true
-		},
-        {
-			"id": "43fca9c6-91f4-4593-9e5c-fac85beab5a7",
-			"task": "Eat breakfast",
-			"isCompleted": true
-		},
-        {
-			"id": "42828c93-afb5-4761-ba55-becfda40b11b",
-			"task": "Go to office",
-			"isCompleted": false
-		}
-	]
+  "Table": {
+    "TableName": "-todo",
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "id",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "userId",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "todoDate",
+        "AttributeType": "S"
+      }
+    ],
+    "KeySchema": [
+      {
+        "AttributeName": "userId",
+        "KeyType": "HASH"
+      },
+      {
+        "AttributeName": "id",
+        "KeyType": "RANGE"
+      }
+    ],
+    "LocalSecondaryIndexes": [
+      {
+        "IndexName": "UserIndex",
+        "KeySchema": [
+          {
+            "AttributeName": "userId",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "todoDate",
+            "KeyType": "RANGE"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        }
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
+    }
+  },
+  "Seeds": [
+    {
+      "id": "1",
+      "todoName": "Todo 1",
+      "userId": "1",
+      "todoDate": "2016-08-27T18:12:00.000",
+      "enabled": true
+    },
+    {
+      "id": "2",
+      "todoName": "Todo 2",
+      "userId": "1",
+      "todoDate": "2016-08-27T01:23:00.000",
+      "enabled": true
+    }
+  ]
 }

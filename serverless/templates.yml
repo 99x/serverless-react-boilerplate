@@ -3,6 +3,7 @@ request:
     application/json: >
       {
         "data": $input.json('$'),
+        "principalId": "$context.authorizer.principalId",
         "path": "$context.resourcePath",
         "stage": "$context.stage",
         "method": "$context.httpMethod",

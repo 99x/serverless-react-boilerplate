@@ -1,2 +1,8 @@
+.DS_Store
+.serverless
 node_modules
 web/public/
+web/bundle.js
+*.webpack.config.js
+.env
+.env.*

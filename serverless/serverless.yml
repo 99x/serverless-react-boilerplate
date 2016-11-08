@@ -11,12 +11,13 @@
 #
 # Happy Coding!
 
-service: aws-react-boilerpate
+service: aws-react-boilerplate
 
 package:
   exclude:
     - node_modules/dynamodb-localhost/**
     - node_modules/serverless-dynamodb-local/**
+    - node_modules/serverless-offline/**    
 
 provider:
   name: aws
@@ -37,6 +38,11 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
+  authorizer:
+    arn: arn:aws:lambda:us-east-1:AWS-ACCOUNT-ID:function:serverless-authentication-${self:custom.stage}-authorize
+    resultTtlInSeconds: 0
+    identitySource: method.request.header.Authorization
+    identityValidationExpression: .*
   dynamodb:
     start:
       migration: true
@@ -44,43 +50,87 @@ custom:
       dir: offline/migrations
       table_prefix: ${self:custom.stage}
   writeEnvVars:
-    REMOTE_STAGE: ${self:custom.stage}
+    TODOS_DB_NAME: ${self:custom.stage}-todos
 
 functions:
-  todo:
-    handler: handlers/todo/handler.todo
+  todos:
+    handler: handlers/todo/handler.todos
     events:
       - http:
           method: GET
-          path: todos/getAll
+          path: todos/{userId}/register          
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
+          authorizer: ${self:custom.authorizer}
+
+      - http:
+          method: GET
+          path: todos/{userId}/getAll          
+          integration: lambda
+          cors: true
+          request: ${file(./templates.yml):request}
+          authorizer: ${self:custom.authorizer}
 
       - http:
           method: DELETE
-          path: todos/delete/{id}
+          path: todos/{userId}/delete/{id}
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
+          authorizer: ${self:custom.authorizer}
 
       - http:
           method: POST
-          path: todos
+          path: todos/{userId}/create
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
+          authorizer: ${self:custom.authorizer}
 
       - http:
           method: PUT
-          path: todos/update
+          path: todos/{userId}/update
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
+          authorizer: ${self:custom.authorizer}
 
       - http:
           method: PUT
-          path: todos/status
+          path: todos/{userId}/status
           integration: lambda
           cors: true
           request: ${file(./templates.yml):request}
+          authorizer: ${self:custom.authorizer}
+
+resources:
+  Resources:
+    Dynamo:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: todoDate
+          AttributeType: S
+        KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: id
+          KeyType: RANGE
+        LocalSecondaryIndexes:
+        - IndexName: UserIndex
+          KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+          - AttributeName: todoDate
+            KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.stage}-todos
