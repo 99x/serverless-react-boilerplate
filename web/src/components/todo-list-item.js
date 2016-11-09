@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import TodoListHeader from './todo-list-header';
 
@@ -8,30 +7,6 @@ export default class TodoListItem extends React.Component {
         this.state = {
             isEditing:false
         };
-    }
-
-    renderTaskSection(){
-        const {task, isCompleted} = this.props;
-        const taskStyle = {
-            color: isCompleted? '#2ecc71' : '#d35400',
-            textDecoration: isCompleted ? 'line-through' : '',
-            fontSize: '20px',
-            cursor: 'pointer'
-        };
-        if(this.state.isEditing){
-            return (
-                <td>
-                    <form onSubmit={this.onSaveClick.bind(this)}>
-                        <input type='text' defaultValue={task} ref='editInput'/>
-                    </form>
-                </td>
-            );
-        }
-        return(
-            <td style={taskStyle} onClick={this.props.toggleTask.bind(this, this.props)}>
-                {task}
-            </td>
-        );
     }
 
     renderActionSection() {
@@ -56,9 +31,36 @@ export default class TodoListItem extends React.Component {
     }
 
     render(){
+         const {id, userId, todoName, todoDate, createdAt, enabled} = this.props;
+         const eventStyle = {
+            color: enabled? '#d35400' : '#2ecc71',
+            textDecoration: enabled ? '' : 'line-through',
+            fontSize: '20px',
+            cursor: 'pointer'
+        };
+         if(this.state.isEditing){
+            return (
+                <tr>
+                    <td>
+                        <form onSubmit={this.onSaveClick.bind(this)}>
+                            <input type='text' defaultValue={todoName} ref='nameInput'/>
+                        </form>
+                    </td>
+                    <td>
+                        <form onSubmit={this.onSaveClick.bind(this)}>
+                            <input type='text' defaultValue={todoDate} ref='dateInput'/>
+                        </form>
+                    </td>
+                    {this.renderActionSection()}
+                </tr>
+            );
+        }
         return (
             <tr>
-                {this.renderTaskSection()}
+                <td style={eventStyle} onClick={this.props.toggleTodo.bind(this, this.props)}>
+                    {todoName}
+                </td>
+                <td>{todoDate}</td>
                 {this.renderActionSection()}
             </tr>
         );
@@ -74,14 +76,17 @@ export default class TodoListItem extends React.Component {
 
     onSaveClick(e){
         e.preventDefault();
-        const oldTask = this.props;
-        const newTask = this.refs.editInput.value;
-        this.props.saveTask(oldTask, newTask);
+        const oldTodo = this.props;
+        var newTodo = {
+            "todoName": this.refs.nameInput.value,
+            "todoDate": this.refs.dateInput.value
+        };
+        this.props.saveTodo(oldTodo, newTodo);
         this.setState({isEditing:false});
     }
 
     onDeleteClick(e){
         e.preventDefault();
-        this.props.deleteTask(this.props)
+        this.props.deleteTodo(this.props);
     }
 }

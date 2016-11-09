@@ -32,7 +32,7 @@ gulp.task('start-offline-server', function(done) {
 
 /* Start offline server for local development */
 gulp.task('start-client', function(done) {
-    runCommand('cd web ' + commandSeparator + 'webpack-dev-server', done);
+    runCommand('cd web ' + commandSeparator + 'webpack-dev-server --history-api-fallback', done);
 });
 
 /* Start offline server for local development */

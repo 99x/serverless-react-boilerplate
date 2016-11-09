@@ -1,14 +1,12 @@
 'use strict';
 
 var Promise = require('bluebird'),
-    dotenv = require('dotenv').config(),
-    db = require('../../../database/dynamodb');
-
-const DB_PREFIX = process.env.IS_OFFLINE ? "dev" : process.env.REMOTE_STAGE;
+    db = require('../../../database/dynamodb'),
+    tablename = process.env.TODOS_DB_NAME;
 
 function getTodo(id) {
     return db('query', {
-        TableName: DB_PREFIX + 'todos',
+        TableName: tablename,
         KeyConditionExpression: '#id = :id',
         ExpressionAttributeValues: {
             ':id': id
@@ -19,54 +17,70 @@ function getTodo(id) {
     });
 }
 
-function getAllTodos() {
-    return db('scan', {
-        TableName: DB_PREFIX + 'todos'
+function getAllTodos(event) {
+    var params = {
+        TableName: tablename,
+        IndexName : 'UserIndex',
+        KeyConditionExpression: '#userId = :userId',
+        ExpressionAttributeValues: {
+            ':userId': event.params.userId
+        },
+        ExpressionAttributeNames: {
+            '#userId': 'userId'
+        },
+        ScanIndexForward: false
+    };
+    return db('query', params);
+}
+
+function guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
     });
 }
 
-function createItem(data) {
+function createTodo(event) {
+    var data = event.data;
+    data.id = guid();
     return db('put', {
-        TableName: DB_PREFIX + 'todos',
-        Item: {
-            "id": data.id,
-            "task": data.task,
-            "isCompleted": data.isCompleted
-        }
+        TableName: tablename,
+        Item: data
     });
 }
 
-function updateItem(data) {
+function updateTodo(event) {
+    var data = event.data;
     return db('update', {
-        TableName: DB_PREFIX + 'todos',
+        TableName: tablename,
         Key: {
-            id: data.id
+            id: data.id,
+            userId: data.userId
         },
-        UpdateExpression: 'set task = :task',
-        ExpressionAttributeValues: {
-            ':task': data.task
-        }
+        UpdateExpression: 'set todoName = :todoName, todoDate = :todoDate',
+        ExpressionAttributeValues: {':todoName': data.todoName, ':todoDate': data.todoDate}
     });
 }
 
-function updateStatus(data) {
+function updateStatus(event) {
+    var data = event.data;
     return db('update', {
-        TableName: DB_PREFIX + 'todos',
+        TableName: tablename,
         Key: {
-            id: data.id
+            id: data.id,
+            userId: data.userId
         },
-        UpdateExpression: 'set isCompleted = :isCompleted',
-        ExpressionAttributeValues: {
-            ':isCompleted': data.isCompleted
-        }
+        UpdateExpression: 'set enabled = :enabled',
+        ExpressionAttributeValues: {':enabled': data.enabled}
     });
 }
 
-function deleteItem(params) {
+function deleteTodo(event){
     return db('delete', {
-        TableName: DB_PREFIX + 'todos',
+        TableName: tablename,
         Key: {
-            id: params.id
+            id: event.params.id,
+            userId: event.params.userId
         }
     });
 }
@@ -74,8 +88,8 @@ function deleteItem(params) {
 module.exports = {
     getTodo: getTodo,
     getAllTodos: getAllTodos,
-    updateItem: updateItem,
+    updateTodo: updateTodo,
     updateStatus: updateStatus,
-    createItem: createItem,
-    deleteItem: deleteItem
+    createTodo: createTodo,
+    deleteTodo: deleteTodo
 };

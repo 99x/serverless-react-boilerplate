@@ -1,0 +1,84 @@
+button, .button {
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase!important;
+  border: 1px solid #ededed;
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.providers {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+button div.text, .button div.text {
+  white-space: nowrap;
+}
+
+.providers button {
+  background: transparent;
+  height: 32px;
+  padding: 3px;
+  display: -webkit-flex;
+  display: flex;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.providers button div {
+  display: inline-block;
+  flex: auto;
+  align-self: center;
+  pointer-events: none;
+}
+
+.providers div.logo {
+  height: 26px;
+  width: 26px;
+}
+
+.providers div.text {
+  padding: 0 10px;
+}
+
+.logout {
+  margin-top: 20px;
+}
+
+button#facebook {
+  background: #4c69ba;
+  background: linear-gradient(#4c69ba, #3b55a0);
+  color: white;
+  border: none;
+}
+
+button#facebook div.logo {
+  background-image: url("/images/icons/f.svg");
+  height: 26px;
+  width: 26px;
+  color: black;
+}
+
+button#google div.logo {
+  background: url("/images/icons/g.svg");
+  height: 22px;
+  width: 22px;
+  margin-left: 2px;
+  color: black;
+}
+
+button#microsoft div.logo {
+  background: url("/images/icons/ms.png");
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  margin-left: 2px;
+  color: black;
+}
