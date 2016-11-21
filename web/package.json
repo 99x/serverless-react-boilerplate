@@ -4,7 +4,7 @@
   "description": "Simple todolist application that uses serverless basic boilerplate as backend",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"    
+    "start": "node server.js"
   },
   "author": "Jeremy Cummins <jeremy.z.cummins@gmail.com>",
   "license": "MIT",
