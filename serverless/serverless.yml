@@ -22,14 +22,14 @@ package:
 provider:
   name: aws
   runtime: nodejs4.3
-  region: us-east-1
-  stage: dev
+  region: ${self:custom.writeEnvVars.REGION}
+  stage: ${self:custom.writeEnvVars.STAGE}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
         - "dynamodb:*"
       Resource:
-        - "arn:aws:dynamodb:us-east-1:*"
+        - "arn:aws:dynamodb:${self:provider.region}:*"
 
 plugins:
   - serverless-offline
@@ -37,9 +37,10 @@ plugins:
   - serverless-plugin-write-env-vars
 
 custom:
-  stage: ${opt:stage, self:provider.stage}
+  writeEnvVars: ${file(./env.yml)}
+  stage: ${opt:stage, self:custom.writeEnvVars.STAGE}
   authorizer:
-    arn: arn:aws:lambda:us-east-1:AWS-ACCOUNT-ID:function:serverless-authentication-${self:custom.stage}-authorize
+    arn: arn:aws:lambda:${self:provider.region}:${self:custom.writeEnvVars.AWS_ACCOUNT_ID}:function:serverless-authentication-${self:custom.stage}-authorize
     resultTtlInSeconds: 0
     identitySource: method.request.header.Authorization
     identityValidationExpression: .*
@@ -49,8 +50,6 @@ custom:
     migration:
       dir: offline/migrations
       table_prefix: ${self:custom.stage}
-  writeEnvVars:
-    TODOS_DB_NAME: ${self:custom.stage}-todos
 
 functions:
   todo:

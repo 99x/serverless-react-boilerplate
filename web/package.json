@@ -4,7 +4,7 @@
   "description": "Simple todolist application that uses serverless basic boilerplate as backend",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js"    
   },
   "author": "Jeremy Cummins <jeremy.z.cummins@gmail.com>",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "css-loader": "0.23.1",
     "foundation-sites": "^6.2.4",
     "jquery": "2.2.1",
+    "js-yaml": "^3.7.0",
     "lodash": "4.16.2",
     "react": "15.3.2",
     "react-dom": "15.3.2",

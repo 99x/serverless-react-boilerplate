@@ -3,6 +3,8 @@
 node_modules
 web/public/
 web/bundle.js
-*.webpack.config.js
+web/bundle.js.map
 .env
-.env.*
+env.yml
+env.*.yml
+webpack.config.js
