@@ -25,7 +25,7 @@ A todo app built with serverless. [View Demo Site](http://sls-react-auth.s3-webs
 ## How to develop and test offline?
 We have used [serverless-offline plugin](https://github.com/dherault/serverless-offline) and [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local) in this boilerplate. You can declare your table templates and seeds in `offline/migrations` folder just like the `todo.json` template. When you spin up the offline server, these tables will be used as the datasources for your lambda functions. Once you are ready to deploy your database and api in AWS use `npm run deploy`.
 
-Note by Jeremy Cummins: testing offline will not work with authentication.
+Note by Jeremy Cummins: testing offline will not work with authentication. The instructions given here run the React client locally, connecting to a `local` stage on AWS.
 
 ## Production vs Offline
 Thanks to the offline plugin's environment variable `IS_OFFLINE` we can select between local dynamodb and aws dynamodb. 
@@ -55,16 +55,18 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 |  |  |  |  |──todo.json
 |  |──test
 |  |──event.json
-|  |──templates.yml
-|  |──serverless.yml
+|  |──example-env.yml
 |  |──package.json
+|  |──serverless.yml
+|  |──templates.yml
 |──web
 |  |──src
 |  |  |──components
 |  |  |──index.js
 |  |──index.html
 |  |──package.json
-|  |──webpack.config.js
+|  |──webpack.dev.config.js
+|  |──webpack.local.config.js
 |──gulpfile.js
 |──package.json
 
@@ -85,51 +87,44 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
   npm install 
 ```
-* Install dynamodb local. (Make sure you have Java runtime 6.x or newer)
-```
-  npm run db-setup
-```
-* Run the client and server locally
-```
- gulp serve
-```
-* Visit `http://localhost:8080`
+
+## Setting up environment variables
+In the `serverless` folder, copy `example-env.yml` to `env.dev.yml` and `env.local.yml` and configure them for each environment.
+You will make a new one for each environment you need with the convention `env.[stage].yml`.
 
 ## Deploying to AWS
 When you are ready to deploy your database and api to AWS, you can create multiple 
-APIGateways for different service level stages. For example you can create "dev" and "production" stages.
-When you deploy to a specific stage, it will create separate database tables for that stage.
+APIGateways for different service level stages. For example you can create "local", "dev" and "prod" stages.
+Then deploy using the stage parameter:
+```
+gulp deploy --stage local
+```
+This command will deploy the API Gateway to AWS in the "local" service stage. This will:
+* Copy serverless/env.local.yml to serverless/env.yml
+* Deploy the local stage serverless Lambda app and associated API to AWS
+* Copy web/webpack.local.config.js to web/webpack.config.js
+* Run the local React webserver and open a browser
 
-In **serverless/serverless.yml** replace **AWS-ACCOUNT-ID** in the custom authorizer arn. 
-The arn should match the serverless-authentication-boilerplate arn for the stage you will be deploying.
-
-Following command will deploy your local dabase and local API Gateway to AWS in dev service stage.
+You can configure a deployment stage to sync to an s3 bucket or ftp to a server, however you want to set up hosting. See the `deploy-web` gulp task.
+To sync to an s3 bucket, change the `sync-web-s3` to point to your s3 bucket.
 ```
 gulp deploy --stage dev
 ```
-Once you have tested it on dev stage you can do a final production stage release by,
+This command will deploy the API Gateway to AWS in the "dev" service stage. This will:
+* Copy serverless/env.dev.yml to serverless/env.yml
+* Deploy the dev stage serverless Lambda app and associated API to AWS
+* Copy web/webpack.dev.config.js to web/webpack.config.js
+* Build the React app to web/bundle.js
+* Sync the web folder to your s3 bucket
+
+Once you have tested it on dev stage you can do a final production stage release by configuring serverless/env.prod.yml and web/webpack.prod.config.js, 
+then modify the `deploy-web` gulp task to do what it needs to do to push the front end files to your production hosting solution.
 ```
 gulp deploy --stage prod
 ```
 
-Replace the **API-ID** in the **BASE_URL** key in **web/webpack.config.js**. Make sure the region (i.e. 'us-east-1') and stage match your deployment.
-Get the authentication endpoint ID from serverless-authentication-boilerplate and replace the **AUTH-ENDPOINT-ID** in the **AUTH_URL** key in **web/webpack.config.js**. Match the region and stage here as well.
-
-## Environment Variables 
-You can define environment variables for you application in the **custom** section. e.g. the DB table name is currently defined here as TODOS_DB_NAME.
-
-```
-custom
-  writeEnvVars:
-    TODOS_DB_NAME: ${self:custom.stage}-todos
-```
-Once you have deployed the functions in AWS these environment variables will be available in the process.env object.
-```
-process.env.TODOS_DB_NAME
-```
-
 ## Contribution
-Your contributions are much appriciated. 
+Your contributions are much appreciated. 
 
 ## Release Log
 * Release v3.0.0 - Added environment variables for database table names &  Feature to deploy in multiple APIGateway service level stages.

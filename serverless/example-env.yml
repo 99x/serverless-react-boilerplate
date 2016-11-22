@@ -1,0 +1,14 @@
+STAGE: dev
+
+# Make sure this table name is different for each stage
+TODOS_DB_NAME: dev-todos
+
+AWS_ACCOUNT_ID: AWS-ACCOUNT-ID
+REGION: us-east-1
+NODE_ENV: development
+
+# Use the API url given by the serverless deploy for this stage
+BASE_URL: https://API-ID.execute-api.us-east-1.amazonaws.com/dev
+
+# Use the AUTH_URL from the serverless-authentication-boilerplate deployment
+AUTH_URL: https://AUTH-API-ID.execute-api.us-east-1.amazonaws.com/dev
