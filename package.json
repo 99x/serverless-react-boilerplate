@@ -15,7 +15,10 @@
     "preinstall": "cd web && npm install",
     "postinstall": "cd serverless && npm install",
     "db-setup": "cd serverless && sls dynamodb install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-register --require ./test/helpers.js --require ./test/dom.js --recursive",
+    "tdd": "npm test -- --watch",
+    "dev": "webpack-dev-server --port 3000 --devtool eval --progress --colors --hot --content-base dist",
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -34,6 +37,11 @@
   },
   "homepage": "https://github.com/mjzone/serverless-boilerplate#readme",
   "devDependencies": {
-    "opn": "4.0.2"
+    "chai": "^4.1.1",
+    "enzyme": "^2.9.1",
+    "mocha": "^3.5.0",
+    "opn": "4.0.2",
+    "react-addons-test-utils": "^15.6.0",
+    "sinon": "^3.2.1"
   }
 }
