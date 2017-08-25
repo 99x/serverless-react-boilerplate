@@ -16,7 +16,11 @@ export default class App extends React.Component {
         this.state = {
             todos
         };
-        this.init();
+        this.init = this.init.bind(this);
+    }
+
+    componentDidMount() {
+      this.init();
     }
 
     init() {
@@ -24,6 +28,7 @@ export default class App extends React.Component {
         axios.get(BASE_URL + '/todos/getAll').then(function(response) {
             self.setState({todos: response.data.result.Items});
         }).catch(function(error) {
+            self.setState({todos: [{}, {}]});
             console.log(error);
         });
     }
