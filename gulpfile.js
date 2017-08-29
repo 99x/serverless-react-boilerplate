@@ -20,6 +20,11 @@ function runCommand(cmd, done) {
     });
 }
 
+/* Install dynamodb local instance */
+gulp.task('install-dynamodb', function(done) {
+    runCommand('cd serverless' + commandSeparator + ' sls dynamodb install', done);
+});
+
 /* Start dynamodb local instance */
 gulp.task('start-dynamodb', function(done) {
     runCommand('cd serverless' + commandSeparator + ' sls dynamodb start', done);
@@ -40,19 +45,5 @@ gulp.task('open-website', function(done) {
     require("opn")("http://localhost:8080");
 });
 
-/* Deploy the local database tables to AWS dynamodb */
-gulp.task('deploy-db', function(cb) {
-    stage = (util.env.stage) ? "--stage " + util.env.stage : "";
-    runCommand('cd serverless' + commandSeparator + ' sls dynamodb executeAll ' + stage);
-});
-
-/* Deploy Lambdas and API Gateway to AWS */
-gulp.task('deploy-api', function(cb) {
-    runCommand('cd serverless' + commandSeparator + ' sls deploy ' + stage + ' -v');
-});
-
-/* Deploy service in AWS */
-gulp.task('deploy', gulpSequence(['deploy-db', 'deploy-api']));
-
 /* Start application locally */
-gulp.task('serve', gulpSequence(['start-client', 'open-website', 'start-dynamodb', 'start-offline-server']));
+gulp.task('serve', gulpSequence(['start-offline-server', 'start-client', 'open-website']));

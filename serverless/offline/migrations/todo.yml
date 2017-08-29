@@ -1,0 +1,14 @@
+todosTable:
+  Type: AWS::DynamoDB::Table
+  DeletionPolicy : Retain
+  Properties:
+    TableName: ${self:custom.DB_PREFIX}-todos
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    ProvisionedThroughput:
+      ReadCapacityUnits: 1
+      WriteCapacityUnits: 1

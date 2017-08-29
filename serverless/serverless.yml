@@ -1,22 +1,10 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
-
 service: aws-react-boilerpate
 
 package:
   exclude:
     - node_modules/dynamodb-localhost/**
     - node_modules/serverless-dynamodb-local/**
+    - node_modules/serverless-offline/**
 
 provider:
   name: aws
@@ -31,20 +19,23 @@ provider:
         - "arn:aws:dynamodb:us-east-1:*"
 
 plugins:
-  - serverless-offline
   - serverless-dynamodb-local
-  - serverless-plugin-write-env-vars
+  - serverless-offline
 
 custom:
   stage: ${opt:stage, self:provider.stage}
-  dynamodb:
+  DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
+  dynamodb:  
     start:
-      migration: true
-    migration:
-      dir: offline/migrations
-      table_prefix: ${self:custom.stage}
-  writeEnvVars:
-    REMOTE_STAGE: ${self:custom.stage}
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      domain:
+        sources:
+          - table: ${self:custom.DB_PREFIX}-todos
+            sources: [./offline/migrations/todo-seed.json]
 
 functions:
   todo:
@@ -53,34 +44,28 @@ functions:
       - http:
           method: GET
           path: todos/getAll
-          integration: lambda
           cors: true
-          request: ${file(./templates.yml):request}
 
       - http:
           method: DELETE
           path: todos/delete/{id}
-          integration: lambda
           cors: true
-          request: ${file(./templates.yml):request}
 
       - http:
           method: POST
           path: todos
-          integration: lambda
           cors: true
-          request: ${file(./templates.yml):request}
 
       - http:
           method: PUT
           path: todos/update
-          integration: lambda
           cors: true
-          request: ${file(./templates.yml):request}
 
       - http:
           method: PUT
           path: todos/status
-          integration: lambda
           cors: true
-          request: ${file(./templates.yml):request}
+
+resources:
+  Resources: ${file(offline/migrations/todo.yml)}
+    
