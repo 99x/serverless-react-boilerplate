@@ -1,8 +1,9 @@
 module.exports.parseEvent = (event) => {
     return {
-        data: event.data,
-        path: event.path,
-        stage: event.stage,
-        params: JSON.parse(event.params || "{}")
-    };
+        data: JSON.parse(event.body || "{}"),
+        path: event.requestContext.resourcePath,
+        stage: event.requestContext.stage,
+        params: event.pathParameters,
+        queryParams: event.queryStringParameters
+    }
 };

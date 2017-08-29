@@ -2,7 +2,7 @@
 
 var todo = require('./lib/todo'),
     parser = require('../parser'),
-    env = require('dotenv').config();
+    response = require('../response');
 
 module.exports.todo = (event, context, cb) => {
     var event = parser.parseEvent(event),
@@ -10,21 +10,21 @@ module.exports.todo = (event, context, cb) => {
 
     switch (path) {
         case '/todos':
-            todo.create(event, context);
+            todo.create(event, cb);
             break;
         case '/todos/update':
-            todo.update(event, context);
+            todo.update(event, cb);
             break;
         case '/todos/status':
-            todo.status(event, context);
+            todo.status(event, cb);
             break;
         case '/todos/getAll':
-            todo.getAll(event, context);
+            todo.getAll(event, cb);
             break;
         case '/todos/delete/{id}':
-            todo.delete(event, context);
+            todo.delete(event, cb);
             break;
         default:
-            context.fail('Invalid api call');
+            cb(null, response.create(404, {"Error": "API Route: "+ path + " not found!"}));
     }
 };

@@ -15,6 +15,7 @@
     "preinstall": "cd web && npm install",
     "postinstall": "cd serverless && npm install",
     "db-setup": "cd serverless && sls dynamodb install",
+    "db-remove": "cd serverless && sls dynamodb remove",
     "test": "mocha --compilers js:babel-register --require ./test/helpers.js --require ./test/dom.js --recursive",
     "tdd": "npm test -- --watch",
     "dev": "webpack-dev-server --port 3000 --devtool eval --progress --colors --hot --content-base dist",

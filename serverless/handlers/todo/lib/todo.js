@@ -1,45 +1,56 @@
 'use strict';
 
-var helper = require('./helper');
+var helper = require('./helper'),
+    response = require('../../response');
 
-module.exports.create = (event, context) => {
+module.exports.create = (event, cb) => {
     helper.createItem(event.data).then(result => {
-        context.succeed({});
+        cb(null, response.create(201, {}));
     }).catch(err => {
-        context.fail("Error: " + err);
+        cb(null, response.create(500, {
+            err: err
+        }));
     })
 };
 
-module.exports.update = (event, context) => {
+module.exports.update = (event, cb) => {
     helper.updateItem(event.data).then(result => {
-        context.succeed({});
+        cb(null, response.create(200, {}));
     }).catch(err => {
-        context.fail("Error: " + err);
+        cb(null, response.create(500, {
+            err: err
+        }));
     })
 };
 
-module.exports.status = (event, context) => {
+module.exports.status = (event, cb) => {
     helper.updateStatus(event.data).then(result => {
-        context.succeed({});
+        cb(null, response.create(200, {}));
     }).catch(err => {
-        context.fail("Error: " + err);
+        cb(null, response.create(500, {
+            err: err
+        }));
     })
 };
 
-module.exports.getAll = (event, context) => {
+module.exports.getAll = (event, cb) => {
     helper.getAllTodos().then(todos => {
-        context.succeed({
+        cb(null, response.create(200, {
             result: todos
-        });
+        }));
     }).catch(err => {
-        context.fail("Error: " + err);
+        cb(null, response.create(500, {
+            err: err
+        }));
     });
 };
 
-module.exports.delete = (event, context) => {
+module.exports.delete = (event, cb) => {
     helper.deleteItem(event.params).then(result => {
-        context.succeed({});
+        cb(null, response.create(200, {}));
     }).catch(err => {
-        context.fail("Error: " + err);
+        cb(null, response.create(500, {
+            err: err
+        }));
     })
 };

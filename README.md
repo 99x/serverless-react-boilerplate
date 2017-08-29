@@ -9,23 +9,18 @@ serverless-react-boilerplate
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally.
 
 ## Features
-* Support serverless v1.0
+* Support serverless v1.x
 * Support offline development with dynamodb, lambda and API Gateway
 * Support local dynamodb seeds/migrations
 * Build automation in client and server to ease local development
 * Deploy to multiple APIGateways
-* Environment variables with dotenv 
+* Use of Environment variables 
 * Lambda CRUD operations for a Todo application with live reload
 * React web application to utilize the API
 
-## Demo
-A todo app built with serverless. [View Demo Site](https://evening-brushlands-67444.herokuapp.com/)
-
-## Extended boilerplate with authentication
-You can find this boilerplate with authentication added on [this](https://github.com/99xt/serverless-react-boilerplate/tree/react-authenticate) branch.
 
 ## How to develop and test offline?
-We have used [serverless-offline plugin](https://github.com/dherault/serverless-offline) and [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local) in this boilerplate. You can declare your table templates and seeds in `offline/migrations` folder just like the `todo.json` template. When you spin up the offline server, these tables will be used as the datasources for your lambda functions. Once you are ready to deploy your database and api in AWS use `npm run deploy`.
+We have used [serverless-offline plugin](https://github.com/dherault/serverless-offline) and [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local) in this boilerplate. You can declare your table templates and seeds in `offline/migrations/` folder just like the `todo.json` template. When you spin up the offline server, these tables will be used as the datasources for your lambda functions.
 
 ## Production vs Offline
 Thanks to the offline plugin's environment variable `IS_OFFLINE` we can select between local dynamodb and aws dynamodb. 
@@ -52,8 +47,10 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 |  |  |──dynamodb.js
 |  |──offline
 |  |  |──migrations
-|  |  |  |  |──todo.json
+|  |  |  |  |──todo.yml
+|  |  |  |  |──todo-seed.json
 |  |──test
+|  |──config.yml
 |  |──event.json
 |  |──templates.yml
 |  |──serverless.yml
@@ -75,9 +72,9 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
 * Install webpack and serverless globally.
 ```
- npm i -g webpack webpack-dev-server
+ npm i -g gulp webpack webpack-dev-server
  
- npm i -g serverless@1.0
+ npm i -g serverless
  ```
 * Install project dependencies. `cd serverless-react-boilerplate` and type,
 ```
@@ -91,42 +88,45 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
  gulp serve
 ```
-* Visit `http://localhost:8080`
+* Visit `http://localhost:8080` and refresh
 
 ## Deploying to AWS
 When you are ready to deploy your database and api to AWS, you can create multiple 
 APIGateways for different service level stages. For example you can create "dev" and "production" stages.
 When you deploy to a specific stage, it will create a separate database tables for that stage.
 
-Following command will deploy your local dabase and local API Gateway to AWS in dev service stage.
+Following command will deploy your local dabase and local API Gateway to AWS stage.
 ```
-gulp deploy --stage dev
+cd serverless
+serverless deploy --stage <stage> --verbose
 ```
-Once you have tested it on dev stage you can do a final production stage release by,
-```
-gulp deploy --stage prod
-```
+
 If you want to test your React app with the online API and Database, you may have to change the, **BASE_URL** of the react app
 found in **web/src/components/app.js**. Change its value from **http://localhost:3000** to your **APIGateway uri**.
 
-## Environment Variables 
-You can define environment variables for you application in the **custom** section. For example if you need to have a database 
-connection string in the environment and use it in your lambda function, define it as follows.
+## Application Secrets Keys
+You can define application secret keys in **config.yml** file. For example if you need to have a database 
+connection string and use it in your lambda function, define it as follows.
 
 ```
-custom
-  writeEnvVars:
-    DB_CONNECTION_STRING: connection_string_here
+prod:
+  DB_STRING: <my-db-connection-string>
 ```
-Once you have deployed the functions in AWS you can access your connection string as follows,
+
+Then in the serverless.yml file, 
 ```
-process.env.DB_CONNECTION_STRING
+custom:
+  DB_STRING: ${file(./config.yml):${self:custom.stage}.DB_STRING}
 ```
+This will corretly select the DB_STRING corresponding to the defined stage.
+
+You should **NOT** commit config.yml to your version control system 
 
 ## Contribution
 Your contributions are much appriciated. 
 
 ## Release Log
+* Release v4.0.0 - Added support for serverless@1.x 
 * Release v3.0.0 - Added environment variables for database table names &  Feature to deploy in multiple APIGateway service level stages.
 * Release v2.2.0 - Added foundation css framework for the react client
 * Release v2.1.1 - Improvements in react web app
