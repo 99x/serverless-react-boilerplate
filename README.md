@@ -5,6 +5,9 @@ serverless-react-boilerplate
 [![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Sample Todo App
+<img width="964" alt="screen shot 2017-08-29 at 4 49 58 am" src="https://user-images.githubusercontent.com/2338919/29805880-e14eb17c-8ca9-11e7-9b3d-a171238e880c.png">
+
 ## Requirements
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally.
 
