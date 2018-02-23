@@ -16,7 +16,7 @@
     "babel-preset-react": "6.16.0",
     "css-loader": "0.23.1",
     "foundation-sites": "6.2.0",
-    "jquery": "2.2.1",
+    "jquery": "3.0.0",
     "lodash": "4.16.2",
     "react": "15.3.2",
     "react-dom": "15.3.2",
