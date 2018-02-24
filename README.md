@@ -37,7 +37,7 @@ var dynamodbOfflineOptions = {
 var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOptions) :  new AWS.DynamoDB.DocumentClient();
 ```
 
-###Directory structure
+### Directory structure
 ```
 |──api
 |  |──todo
@@ -133,8 +133,8 @@ On the root level package.json file add that bucket name and your AWS profile na
 ```
 
 See following vidoes for a step by step guide to create a s3 bucket and configure static web hosting.
-[Video 01 - Hosting a website on AWS with S3, CloudFront and Route53 ](https://youtu.be/D6qB7MEFOe0)
-[Video 02 - Hosting Angular, React and Vue.js applications on AWS](https://youtu.be/f20XOaQ3JDA)
+#### [Video 01 - Hosting a website on AWS with S3, CloudFront and Route53 ](https://youtu.be/D6qB7MEFOe0)
+#### [Video 02 - Hosting Angular, React and Vue.js applications on AWS](https://youtu.be/f20XOaQ3JDA)
 
 ## Contribution
 Your contributions are much appriciated. 
