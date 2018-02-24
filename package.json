@@ -13,13 +13,12 @@
   },
   "scripts": {
     "preinstall": "cd web && npm install",
-    "postinstall": "cd serverless && npm install",
-    "db-setup": "cd serverless && sls dynamodb install",
-    "db-remove": "cd serverless && sls dynamodb remove",
-    "test": "mocha --compilers js:babel-register --require ./test/helpers.js --require ./test/dom.js --recursive",
-    "tdd": "npm test -- --watch",
-    "dev": "webpack-dev-server --port 3000 --devtool eval --progress --colors --hot --content-base dist",
-    "build": "webpack -p"
+    "postinstall": "cd api && cd todo && npm install",
+    "db-setup": "cd api && cd todo && sls dynamodb install",
+    "db-remove": "cd api && cd todo && sls dynamodb remove",
+    "predeploy-s3": "cd web && npm run build",
+    "deploy-s3": "cd web && aws s3 --profile <profile> sync ./build/ s3://<bucket_name> --region <region>",
+    "app": "gulp serve"
   },
   "repository": {
     "type": "git",
@@ -38,11 +37,5 @@
   },
   "homepage": "https://github.com/mjzone/serverless-boilerplate#readme",
   "devDependencies": {
-    "chai": "^4.1.1",
-    "enzyme": "^2.9.1",
-    "mocha": "^3.5.0",
-    "opn": "4.0.2",
-    "react-addons-test-utils": "^15.6.0",
-    "sinon": "^3.2.1"
   }
 }

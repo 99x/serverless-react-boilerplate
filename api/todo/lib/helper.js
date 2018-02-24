@@ -1,7 +1,7 @@
 'use strict';
 
 var Promise = require('bluebird'),
-    db = require('../../../database/dynamodb');
+    db = require('../database/dynamodb');
 
 const DB_PREFIX = process.env.IS_OFFLINE ? "dev" : process.env.DB_PREFIX;
 
@@ -24,7 +24,7 @@ function getAllTodos() {
     });
 }
 
-function createItem(data) {
+function createTodo(data) {
     return db('put', {
         TableName: DB_PREFIX + '-todos',
         Item: {
@@ -35,7 +35,7 @@ function createItem(data) {
     });
 }
 
-function updateItem(data) {
+function updateTodo(data) {
     return db('update', {
         TableName: DB_PREFIX + '-todos',
         Key: {
@@ -48,7 +48,7 @@ function updateItem(data) {
     });
 }
 
-function updateStatus(data) {
+function updateTodoStatus(data) {
     return db('update', {
         TableName: DB_PREFIX + '-todos',
         Key: {
@@ -61,7 +61,7 @@ function updateStatus(data) {
     });
 }
 
-function deleteItem(params) {
+function deleteTodo(params) {
     return db('delete', {
         TableName: DB_PREFIX + '-todos',
         Key: {
@@ -73,8 +73,8 @@ function deleteItem(params) {
 module.exports = {
     getTodo: getTodo,
     getAllTodos: getAllTodos,
-    updateItem: updateItem,
-    updateStatus: updateStatus,
-    createItem: createItem,
-    deleteItem: deleteItem
+    updateTodo: updateTodo,
+    updateTodoStatus: updateTodoStatus,
+    createTodo: createTodo,
+    deleteTodo: deleteTodo
 };

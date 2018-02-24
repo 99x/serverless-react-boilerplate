@@ -1,6 +1,0 @@
-dev:
-  SECRET_KEY: secret_key_here
-  DB_PREFIX: dev
-prod:
-  SECRET_KEY: secret_key_here
-  DB_PREFIX: prod

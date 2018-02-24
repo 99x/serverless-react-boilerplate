@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import CreateTodo from './create-todo';
-import TodoList from './todo-list';
-
-// load foundation
-require('style!css!foundation-sites/dist/foundation.min.css');
-$(document).foundation();
+import _ from 'lodash';
+import CreateTodo from './components/todo/create-todo';
+import TodoList from './components/todo/todo-list';
+import './App.css';
 
 const BASE_URL = 'http://localhost:3000';
 var todos = [];
 
-export default class App extends React.Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,15 +32,15 @@ export default class App extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <div className="row large-6 large-offset-5 medium-6 medium-offset-5 small-6 small-offset-5 columns">
-                    <h3>My Todo List</h3>
-                </div>
-                <CreateTodo createTask={this.createTask.bind(this)}/>
-                <TodoList todos={this.state.todos} toggleTask={this.toggleTask.bind(this)} saveTask={this.saveTask.bind(this)} deleteTask={this.deleteTask.bind(this)}/>
+      return (
+        <div>
+            <div className="row large-6 large-offset-5 medium-6 medium-offset-5 small-6 small-offset-5 columns">
+                <h3>My Todo List</h3>
             </div>
-        );
+            <CreateTodo createTask={this.createTask.bind(this)}/>
+            <TodoList todos={this.state.todos} toggleTask={this.toggleTask.bind(this)} saveTask={this.saveTask.bind(this)} deleteTask={this.deleteTask.bind(this)}/>
+        </div>
+    );
     }
 
     createTask(task) {
