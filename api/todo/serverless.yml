@@ -4,7 +4,7 @@ frameworkVersion: "=1.26.0"
 provider:
   name: aws
   runtime: nodejs6.10
-  profile: youtube
+  profile: default # AWS CLI profile name
   stage: dev
   region: eu-west-2
   iamRoleStatements:
@@ -12,7 +12,7 @@ provider:
       Action:
         - "dynamodb:*"
       Resource:
-        - "arn:aws:dynamodb:eu-west-2:*"
+        - "arn:aws:dynamodb:*:*"
   environment: 
     APP_SECRET: ${file(./config.yml):${self:custom.stage}.APP_SECRET}
     DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
