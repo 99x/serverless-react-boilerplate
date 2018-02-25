@@ -153,7 +153,7 @@ See following vidoes for a step by step guide to create a s3 bucket and configur
 Your contributions are much appriciated. 
 
 ## Release Log
-* Release v4.0.0 - Updated boilerplate to support Lambda Proxy
+* Release v4.1.0 - Updated boilerplate to support Lambda Proxy
 * Release v4.0.0 - Added support for serverless@1.x 
 * Release v3.0.0 - Added environment variables for database table names &  Feature to deploy in multiple APIGateway service level stages.
 * Release v2.2.0 - Added foundation css framework for the react client
