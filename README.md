@@ -72,8 +72,6 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 * Make sure AWS credentials are setup properly. Otherwise refer [this document](https://github.com/serverless/serverless/blob/master/docs/02-providers/aws/01-setup.md)
 * Install webpack and serverless globally.
 ```
- npm i -g gulp create-react-app
- 
  npm i -g serverless
  ```
 * Install project dependencies. `cd serverless-react-boilerplate` and type,
@@ -84,9 +82,9 @@ var client = isOffline() ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOption
 ```
   npm run db-setup
 ```
-* Run the app
+* Run the app with the local server
 ```
-  npm run app with the local server
+  npm run app
 ```
 * Browser will open the todo app at `http://localhost:3001`
 

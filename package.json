@@ -36,6 +36,5 @@
     "url": "https://github.com/mjzone/serverless-boilerplate/issues"
   },
   "homepage": "https://github.com/mjzone/serverless-boilerplate#readme",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
