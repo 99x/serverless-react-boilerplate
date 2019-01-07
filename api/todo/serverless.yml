@@ -1,12 +1,12 @@
 service: todo
-frameworkVersion: "=1.26.0"
+frameworkVersion: "=1.35.1"
 
 provider:
   name: aws
   runtime: nodejs6.10
-  profile: default # AWS CLI profile name
+  profile: tromesh # AWS CLI profile name
   stage: dev
-  region: eu-west-2
+  region: us-east-1
   iamRoleStatements:
     - Effect: "Allow"
       Action:
