@@ -1,14 +1,4 @@
-=======
-# AWS Serverless Boilerplates
-This boilerplate contains,
-  - AWS Lambda Functions
-  - AWS API Gateway
-  - Request Mapping Templates
-  - Dynamodb table templates
-  - IAM Roles Definition
-  - AWS Custom Authorizer Authentication
-  - CRUD for sample TODO application
-  - Angular client that utilizes the API.
+# serverless-react-boilerplate
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 [![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
