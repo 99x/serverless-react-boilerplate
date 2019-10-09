@@ -1,5 +1,4 @@
-serverless-react-boilerplate
-============================
+# serverless-react-boilerplate
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 [![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
