@@ -1,9 +1,7 @@
 let gulp = require("gulp"),
   isWin = /^win/.test(process.platform),
   commandSeparator = isWin ? "&" : ";",
-  webpack = require("webpack"),
-  exec = require("child_process").exec,
-  stage = null;
+  exec = require("child_process").exec;
 
 function runCommand(cmd, done) {
   let ls = exec(cmd);
