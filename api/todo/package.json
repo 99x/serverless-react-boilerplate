@@ -9,11 +9,11 @@
   "author": "Manoj Fernando <manojf@99x.lk>",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "2.384.0",
-    "bluebird": "3.5.3"
+    "aws-sdk": "2.756.0",
+    "bluebird": "3.7.2"
   },
   "devDependencies": {
-    "serverless-offline": "3.31.3",
-    "serverless-dynamodb-local": "^0.2.30"
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "6.7.0"
   }
 }

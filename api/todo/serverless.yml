@@ -1,9 +1,8 @@
 service: todo
-frameworkVersion: "=1.35.1"
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs12.x
   profile: tromesh # AWS CLI profile name
   stage: dev
   region: us-east-1
@@ -13,7 +12,7 @@ provider:
         - "dynamodb:*"
       Resource:
         - "arn:aws:dynamodb:*:*"
-  environment: 
+  environment:
     APP_SECRET: ${file(./config.yml):${self:custom.stage}.APP_SECRET}
     DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
 
@@ -24,7 +23,12 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
-  dynamodb:  
+  serverless-offline:
+    noPrependStageInUrl: true
+    useChildProcesses: true
+  dynamodb:
+    stages:
+      - dev
     start:
       port: 8000
       inMemory: true
@@ -68,7 +72,7 @@ functions:
           method: PUT
           path: todos/status
           cors: true
-  
+
   deleteTodo:
     handler: handler.deleteTodo
     events:
