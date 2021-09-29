@@ -8,7 +8,7 @@
     "gulp-exec": "3.0.2",
     "gulp-sequence": "1.0.0",
     "gulp-util": "3.0.7",
-    "i": "0.3.5",
+    "i": "0.3.7",
     "webpack": "4.19.1"
   },
   "scripts": {
