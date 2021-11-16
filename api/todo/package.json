@@ -9,7 +9,7 @@
   "author": "Manoj Fernando <manojf@99x.lk>",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "2.384.0",
+    "aws-sdk": "2.814.0",
     "bluebird": "3.5.3"
   },
   "devDependencies": {
