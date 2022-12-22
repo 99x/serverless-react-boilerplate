@@ -13,7 +13,7 @@
     "bluebird": "3.5.3"
   },
   "devDependencies": {
-    "serverless-offline": "3.31.3",
+    "serverless-offline": "12.0.3",
     "serverless-dynamodb-local": "^0.2.30"
   }
 }
